@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni</title>
+    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -37,8 +37,8 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="prenota.html" class="nav-link">Prenota elaborazione</a></li>
+	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="prenota.html" class="nav-link">Prenota elaborazione</a></li>
 	          <li class="nav-item"><a href="pricing.html" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="car.html" class="nav-link">Eventi</a></li>
 	          <li class="nav-item"><a href="contact.html" class="btn btn-primary nav-link">Login</a></li>
@@ -47,99 +47,101 @@
 	    </div>
 	  </nav>
     
-    <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpeg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
-        <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
-          <div class="col-lg-8 ftco-animate">
-          	<div class="text w-100 text-center mb-md-5 pb-md-5">
-	            <h1 class="mb-4">Dietro ogni grande pilota c'è sempre una grande officina</h1>
-	            <p style="font-size: 18px;">Passione e tecnica dal 1992</p>
-            </div>
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+            <h1 class="mb-3 bread">Prenota elaborazione</h1>
           </div>
         </div>
       </div>
-    </div>
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-          	<span class="subheading">Servizi</span>
-            <h2 class="mb-3">La nostra offerta</h2>
-          </div>
-        </div>
-				<div class="row">
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Elaborazioni personalizzate</h3>
-                <p>Seleziona le componenti che vorresti vedere sulla tua auto e al resto ci pensiamo noi!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Stage tuning</h3>
-                <p>Affidati ad uno dei nostri kit specifici per la tua auto, al migliore dei prezzi!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-suv"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Prove su banco</h3>
-                <p>Qualsiasi sia la potenza e la coppia, vieni a scoprirlo sul nostro banco di prova!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Eventi</h3>
-                <p>Consulta il nostro calendario di selezione di eventi tuning e automotivi!</p>
-              </div>
-            </div>
-					</div>
-				</div>
-			</div>
-		</section>
+    </section>
 
-    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
-			<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row">
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="29">0</strong>
-                <span>Anni di <br>esperienza</span>
-              </div>
+    <section class="ftco-section contact-section">
+        <div class="container">
+                <div class="col-md-12">
+                <form>
+                    <div class="row">
+                    <div class="col">
+                    <div class="form-group">
+                    <label for="automobile">Automobile</label>
+                    <select class="form-control" id="automobile">
+                      <option></option>
+                      <option>Auto 1</option>
+                      <option>Auto 2</option>
+                      <option>Auto 3</option>
+                      <option>Auto 4</option>
+                      <option>Auto 5</option>
+                    </select>
+                  </div>
+                        </div>
+                        <div class="col">
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" class="form-control" id="data">
+                    </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                        <input type="button" class="btn btn-light" onclick="pers()" id="pers_btn" value="Elaborazione personalizzata">
+                        <input type="button" class="btn btn-light" onclick="kit()" id="kit_btn" value="Kit predefiniti">
+                        </div>
+                    </div>
+                    <div id="pers">
+                        <label for="select_pers">select_pers</label>
+                        <select class="form-control" id="select_pers">
+                          <option></option>
+                          <option>Pers 1</option>
+                          <option>Pers 2</option>
+                          <option>Pers 3</option>
+                          <option>Pers 4</option>
+                          <option>Pers 5</option>
+                        </select>
+                    </div>
+                    <div id="kit">
+                    <label for="select_pers">select_kit</label>
+                        <select class="form-control" id="select_kit">
+                          <option></option>
+                          <option>Kit 1</option>
+                          <option>Kit 2</option>
+                          <option>Kit 3</option>
+                          <option>Kit 4</option>
+                          <option>Kit 5</option>
+                        </select>
+                    </div>
+                    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                    
+                    <script>
+                    
+                        function pers()
+                        {
+                            document.getElementById("pers").style.display = "block";
+                            document.getElementById("kit").style.display = "none";
+                            document.getElementById("pers_btn").classList.remove("btn-light");
+                            document.getElementById("pers_btn").classList.add("btn-dark");
+                            document.getElementById("kit_btn").classList.remove("btn-dark");
+                            document.getElementById("kit_btn").classList.add("btn-light");
+                        }
+                        
+                        function kit()
+                        {
+                            document.getElementById("pers").style.display = "none";
+                            document.getElementById("kit").style.display = "block";
+                            document.getElementById("kit_btn").classList.remove("btn-light");
+                            document.getElementById("kit_btn").classList.add("btn-dark");
+                            document.getElementById("pers_btn").classList.remove("btn-dark");
+                            document.getElementById("pers_btn").classList.add("btn-light");
+                        }
+                        
+                    </script>
+                </form>
             </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1090">0</strong>
-                <span>Elaborazioni <br>effettuate</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1347">0</strong>
-                <span>Clienti <br>soddisfatti</span>
-              </div>
-            </div>
-          </div>
         </div>
-    	</div>
-    </section>	
+    </section>
+	
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -198,6 +200,7 @@
     
   
 
+  <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
