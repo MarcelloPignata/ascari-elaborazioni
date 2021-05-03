@@ -1,7 +1,43 @@
+<?php
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "ascari-elaborazioni";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM automobili";
+    $result = $conn->query($sql);
+    $automobili = array();
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        array_push($automobili,$row);
+      }
+    } else {
+      echo "0 results";
+    }
+
+    $sql = "SELECT * FROM kit";
+    $result = $conn->query($sql);
+    $kit = array();
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        array_push($kit,$row);
+      }
+    } else {
+      echo "0 results";
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Ascari Elaborazioni - Prenota elaborazione</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -25,8 +61,116 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+      
+    <script>
+        
+        var automobili;
+        var kit;
+        
+        function avvio()
+        {
+            var tomorrow = new Date();
+            tomorrow.setDate(new Date().getDate()+1);
+            var dd = tomorrow.getDate();
+            var mm = tomorrow.getMonth()+1;
+            var yyyy = tomorrow.getFullYear();
+            if(dd<10)
+            {
+                dd='0'+dd;
+            } 
+            if(mm<10)
+            {
+                mm='0'+mm;
+            } 
+
+            var date = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("data").setAttribute("min", date); 
+            
+            automobili = <?php echo json_encode($automobili); ?>;
+            kit = <?php echo json_encode($kit); ?>;
+            
+            /*
+            var i;
+            for (i = 0; i < automobili.length; i++)
+            {
+                console.log(automobili[i]["id"] + "  |  " + automobili[i]["marca"] + " " + automobili[i]["modello"] + " " + automobili[i]["serie"]);
+                
+            }
+            
+            var i;
+            for (i = 0; i < kit.length; i++)
+            {
+                console.log(kit[i]["id"] + "  |  " + kit[i]["descrizione"]);
+                
+            }
+            */
+            
+            var select_auto = document.getElementById("select_auto");
+            
+            var i;
+            for (i = 0; i < automobili.length; i++)
+            {
+                var option = document.createElement('option');
+
+                option.text = automobili[i]["marca"] + " " + automobili[i]["modello"] + " " + automobili[i]["serie"];
+                option.value = automobili[i]["id"]; 
+
+                select_auto.appendChild(option); 
+            }
+        }
+        
+        function change_selected_auto()
+        {
+            var id_auto = document.getElementById("select_auto").value;
+            var select_kit = document.getElementById("select_kit");
+            
+            var i, L = select_kit.options.length - 1;
+            
+            for(i = L; i > 0; i--)
+            {
+                select_kit.remove(i);
+            }
+            
+            var i;
+            for (i = 0; i < kit.length; i++)
+            {
+                if(kit[i]["id_automobile"] == id_auto)
+                {
+                    var option = document.createElement('option');
+
+                    option.text = kit[i]["descrizione"];
+                    option.value = kit[i]["id"]; 
+
+                    select_kit.appendChild(option); 
+                }
+            }
+        }
+        
+        function show_pers()
+        {
+            document.getElementById("pers").style.display = "block";
+            document.getElementById("kit").style.display = "none";
+            document.getElementById("pers_btn").classList.remove("btn-light");
+            document.getElementById("pers_btn").classList.add("btn-dark");
+            document.getElementById("kit_btn").classList.remove("btn-dark");
+            document.getElementById("kit_btn").classList.add("btn-light");
+        }
+
+        function show_kit()
+        {
+            try{
+            document.getElementById("pers").style.display = "none";
+            document.getElementById("kit").style.display = "block";
+            document.getElementById("kit_btn").classList.remove("btn-light");
+            document.getElementById("kit_btn").classList.add("btn-dark");
+            document.getElementById("pers_btn").classList.remove("btn-dark");
+            document.getElementById("pers_btn").classList.add("btn-light");
+            }catch(error){console.log(error);}
+        }
+        
+    </script>
   </head>
-  <body>
+  <body onload="avvio();">
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
@@ -67,14 +211,9 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="automobile">Automobile</label>
-                                <select class="form-control" id="automobile">
+                                <label for="select_auto">Automobile</label>
+                                <select class="form-control" id="select_auto" onchange="change_selected_auto();">
                                     <option></option>
-                                    <option>Auto 1</option>
-                                    <option>Auto 2</option>
-                                    <option>Auto 3</option>
-                                    <option>Auto 4</option>
-                                    <option>Auto 5</option>
                                 </select>
                             </div>
                         </div>
@@ -88,8 +227,8 @@
                     
                     <div class="row">
                         <div class="col">
-                        <input type="button" class="btn btn-light" onclick="pers()" id="pers_btn" value="Elaborazione personalizzata">
-                        <input type="button" class="btn btn-light" onclick="kit()" id="kit_btn" value="Selezione kit">
+                        <input type="button" class="btn btn-light" onclick="show_pers()" id="pers_btn" value="Elaborazione personalizzata">
+                        <input type="button" class="btn btn-light" onclick="show_kit()" id="kit_btn" value="Selezione kit">
                         </div>
                     </div>
 
@@ -110,13 +249,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label></label>
-                                            <select class="form-control" id="kit_select">
+                                            <select class="form-control" id="select_kit">
                                                 <option>Seleziona kit...</option>
-                                                <option>Stage 1</option>
-                                                <option>Stage 2</option>
-                                                <option>Stage 3</option>
-                                                <option>Stage 4</option>
-                                                <option>Stage 5</option>
                                             </select>
                                         </div>
                                     </div>
@@ -131,32 +265,6 @@
 
                                 </div>
                             </div>
-                            
-                        </div>
-                    
-                    <script>
-                    
-                        function pers()
-                        {
-                            document.getElementById("pers").style.display = "block";
-                            document.getElementById("kit").style.display = "none";
-                            document.getElementById("pers_btn").classList.remove("btn-light");
-                            document.getElementById("pers_btn").classList.add("btn-dark");
-                            document.getElementById("kit_btn").classList.remove("btn-dark");
-                            document.getElementById("kit_btn").classList.add("btn-light");
-                        }
-                        
-                        function kit()
-                        {
-                            document.getElementById("pers").style.display = "none";
-                            document.getElementById("kit").style.display = "block";
-                            document.getElementById("kit_btn").classList.remove("btn-light");
-                            document.getElementById("kit_btn").classList.add("btn-dark");
-                            document.getElementById("pers_btn").classList.remove("btn-dark");
-                            document.getElementById("pers_btn").classList.add("btn-light");
-                        }
-                        
-                    </script>
                 </form>
             </div>
         </div>
