@@ -152,6 +152,38 @@
                     document.getElementById("prezzo_kit").innerHTML = "";
             }
         }
+
+        function aggiorna_informazioni()
+        {
+            var prezzo;
+            if (document.getElementById("kit").style.display == "block")
+            {
+                var i, found = false;
+                for (i = 0; i < kit.length; i++)
+                {
+                    if(kit[i]["id"] == document.getElementById("select_kit").value)
+                    {
+                        document.getElementById("descrizione_kit").innerHTML = kit[i]["descrizione"];
+                        prezzo = parseFloat(kit[i]["prezzo"]);
+
+                        if(document.getElementById("bancaggio").checked)
+                        {
+                             prezzo += 50;
+                        }
+
+                        document.getElementById("prezzo_kit").innerHTML = prezzo + '€';
+
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if(!found)
+            {
+                    document.getElementById("descrizione_kit").innerHTML = "";
+                    document.getElementById("prezzo_kit").innerHTML = "";
+            }
+        }
         
         function show_pers()
         {
@@ -232,10 +264,18 @@
                         </div>
                     </div>
                     
+
+
                     <div class="row">
                         <div class="col">
-                        <input type="button" class="btn btn-light" onclick="show_pers()" id="pers_btn" value="Elaborazione personalizzata">
-                        <input type="button" class="btn btn-light" onclick="show_kit()" id="kit_btn" value="Selezione kit">
+                            <input type="button" class="btn btn-light" onclick="show_pers()" id="pers_btn" value="Elaborazione personalizzata">
+                            <input type="button" class="btn btn-light" onclick="show_kit()" id="kit_btn" value="Selezione kit">
+                        </div>
+                        <div class="col">
+                                <input class="form-check-input" type="checkbox" id="bancaggio" onclick="aggiorna_informazioni();">
+                                <label class="form-check-label" for="bancaggio" style="color:black;" >
+                                    Bancaggio post-elaborazione
+                                </label>
                         </div>
                     </div>
 
@@ -256,7 +296,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label></label>
-                                            <select class="form-control" id="select_kit" onchange="change_selected_kit();" required>
+                                            <select class="form-control" id="select_kit" onchange="aggiorna_informazioni();" required>
                                                 <option value="">Seleziona kit...</option>
                                             </select>
                                         </div>
