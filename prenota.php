@@ -89,22 +89,6 @@
             automobili = <?php echo json_encode($automobili); ?>;
             kit = <?php echo json_encode($kit); ?>;
             
-            /*
-            var i;
-            for (i = 0; i < automobili.length; i++)
-            {
-                console.log(automobili[i]["id"] + "  |  " + automobili[i]["marca"] + " " + automobili[i]["modello"] + " " + automobili[i]["serie"]);
-                
-            }
-            
-            var i;
-            for (i = 0; i < kit.length; i++)
-            {
-                console.log(kit[i]["id"] + "  |  " + kit[i]["descrizione"]);
-                
-            }
-            */
-            
             var select_auto = document.getElementById("select_auto");
             
             var i;
@@ -138,11 +122,34 @@
                 {
                     var option = document.createElement('option');
 
-                    option.text = kit[i]["descrizione"];
+                    option.text = kit[i]["nome"];
                     option.value = kit[i]["id"]; 
 
                     select_kit.appendChild(option); 
                 }
+            }
+
+            document.getElementById("descrizione_kit").innerHTML = "";
+            document.getElementById("prezzo_kit").innerHTML = "";
+        }
+
+        function change_selected_kit()
+        {
+            var i, found = false;
+            for (i = 0; i < kit.length; i++)
+            {
+                if(kit[i]["id"] == document.getElementById("select_kit").value)
+                {
+                    document.getElementById("descrizione_kit").innerHTML = kit[i]["descrizione"];
+                    document.getElementById("prezzo_kit").innerHTML = kit[i]["prezzo"] + '€';
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+            {
+                    document.getElementById("descrizione_kit").innerHTML = "";
+                    document.getElementById("prezzo_kit").innerHTML = "";
             }
         }
         
@@ -212,7 +219,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="select_auto">Automobile</label>
-                                <select class="form-control" id="select_auto" onchange="change_selected_auto();">
+                                <select class="form-control" id="select_auto" onchange="change_selected_auto();" required>
                                     <option></option>
                                 </select>
                             </div>
@@ -220,7 +227,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="data">Data</label>
-                                <input type="date" class="form-control" id="data">
+                                <input type="date" class="form-control" id="data" required>
                             </div>
                         </div>
                     </div>
@@ -249,17 +256,23 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label></label>
-                                            <select class="form-control" id="select_kit">
-                                                <option>Seleziona kit...</option>
+                                            <select class="form-control" id="select_kit" onchange="change_selected_kit();" required>
+                                                <option value="">Seleziona kit...</option>
                                             </select>
                                         </div>
                                     </div>
+                                        
+                                        <div class="col">
+                                            <br>
+                                            <p id="descrizione_kit" style="color:black;"></p>
+                                        </div>
 
                                 </div>
 
                                 <div class="row">
 
                                     <div class="col">
+                                        <p id="prezzo_kit" style="color:black;"></p>
                                         <button type="submit" class="btn btn-primary" name="submit" value="kit">Prenota</button>
                                     </div>
 
@@ -277,7 +290,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2"><a href="#" class="logo">Ascari<span>Elaborazioni</span></a></h2>
-              <p>In memoria di Alberto Ascari (1918 - 1955)</p>
+              <p>In memoria di Pitorri Giuseppe</p>
             </div>
           </div>
           <div class="col-md">
@@ -286,7 +299,7 @@
               <ul class="list-unstyled">
                 <li><a href="#" class="py-2 d-block">Su di noi</a></li>
                 <li><a href="#" class="py-2 d-block">Contatti</a></li>
-                <li><a href="#" class="py-2 d-block">Github</a></li>
+                <li><a href="https://github.com/MarcelloPignata/ascari-elaborazioni" class="py-2 d-block">Github</a></li>
               </ul>
             </div>
           </div>
@@ -294,8 +307,8 @@
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Link</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Home</a></li>
-                <li><a href="#" class="py-2 d-block">Prenota elaborazione</a></li>
+                <li><a href="index.html" class="py-2 d-block">Home</a></li>
+                <li><a href="prenota.php" class="py-2 d-block">Prenota elaborazione</a></li>
                 <li><a href="#" class="py-2 d-block">Prove su banco</a></li>
                 <li><a href="#" class="py-2 d-block">Eventi</a></li>
                 <li><a href="#" class="py-2 d-block">Login</a></li>
