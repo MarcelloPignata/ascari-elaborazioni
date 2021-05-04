@@ -32,6 +32,16 @@
       echo "0 results";
     }
 
+    $sql = "SELECT * FROM parti";
+    $result = $conn->query($sql);
+    $parti = array();
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        array_push($parti,$row);
+      }
+    } else {
+      echo "0 results";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,34 +74,35 @@
       
     <script>
         
+        // array contenenti i dati del database
         var automobili;
         var kit;
+        var parti;
         
+        var prezzo;
+        var categorie_disponibili = [];
+        
+        // funzione eseguita all'avvio della pagina
         function avvio()
         {
+            // imposto data minima selezionabile
             var tomorrow = new Date();
             tomorrow.setDate(new Date().getDate()+1);
             var dd = tomorrow.getDate();
             var mm = tomorrow.getMonth()+1;
             var yyyy = tomorrow.getFullYear();
-            if(dd<10)
-            {
-                dd='0'+dd;
-            } 
-            if(mm<10)
-            {
-                mm='0'+mm;
-            } 
-
+            if(dd<10){dd='0'+dd;} 
+            if(mm<10){mm='0'+mm;} 
             var date = yyyy+'-'+mm+'-'+dd;
             document.getElementById("data").setAttribute("min", date); 
             
+            // converto gli array dei database di PHP in javascript
             automobili = <?php echo json_encode($automobili); ?>;
             kit = <?php echo json_encode($kit); ?>;
+            parti = <?php echo json_encode($parti); ?>;
             
-            var select_auto = document.getElementById("select_auto");
-            
-            var i;
+            // carico tutte le auto disponibili nel corrispondente menù a tendina
+            var i, select_auto = document.getElementById("select_auto");
             for (i = 0; i < automobili.length; i++)
             {
                 var option = document.createElement('option');
@@ -103,108 +114,205 @@
             }
         }
         
+        // funzione eseguita ogni volta che viene selezionata un'auto
         function change_selected_auto()
         {
             var id_auto = document.getElementById("select_auto").value;
-            var select_kit = document.getElementById("select_kit");
             
-            var i, L = select_kit.options.length - 1;
+            // KIT
             
-            for(i = L; i > 0; i--)
-            {
-                select_kit.remove(i);
-            }
-            
-            var i;
-            for (i = 0; i < kit.length; i++)
-            {
-                if(kit[i]["id_automobile"] == id_auto)
+                var select_kit = document.getElementById("select_kit");
+
+                // svuoto il menù a tendina della selezione kit
+                var i, L = select_kit.options.length - 1;
+                for(i = L; i > 0; i--)
+                {select_kit.remove(i);}
+
+                // aggiungo al menù a tendina tutti i kit disponibili per la macchina selezionata
+                for (i = 0; i < kit.length; i++)
                 {
-                    var option = document.createElement('option');
-
-                    option.text = kit[i]["nome"];
-                    option.value = kit[i]["id"]; 
-
-                    select_kit.appendChild(option); 
+                    if(kit[i]["id_automobile"] == id_auto)
+                    {
+                        var option = document.createElement('option');
+                        option.text = kit[i]["nome"];
+                        option.value = kit[i]["id"]; 
+                        select_kit.appendChild(option); 
+                    }
                 }
-            }
 
-            document.getElementById("descrizione_kit").innerHTML = "";
-            document.getElementById("prezzo_kit").innerHTML = "";
+                // svuoto le informazioni sul kit, essendo esso non più selezionato
+                document.getElementById("descrizione_kit").innerHTML = "";
+            
+            
+            
+            // PERS
+            
+                var pers_col = document.getElementById("pers_col");
+                categorie_disponibili = [];
+            
+                pers_col.innerHTML = "";
+                document.getElementById("prenota_pers").style.display = "none";
+            
+                // ottengo tutte le categorie di parti disponibili per l'auto selezionata
+                for (i = 0; i < parti.length; i++)
+                {
+                    if (parti[i]["id_automobile"] == id_auto)
+                    {
+                        if(!categorie_disponibili.includes(parti[i]["categoria"]))
+                        {
+                            categorie_disponibili.push(parti[i]["categoria"]);
+                        }
+                    }
+                }
+                
+                // creo un menù a tendina per ogni categoria disponibile
+                for (i = 0; i < categorie_disponibili.length; i++)
+                {
+                    pers_col.innerHTML += '<label>' + categorie_disponibili[i] + '</label><select class="form-control" id="' + categorie_disponibili[i] + '" onchange="aggiorna_informazioni();"> <option></option> </select>';
+                }
+            
+                // aggiungo ad ogni menù a tendina le rispettive opzioni
+                for (i = 0; i < parti.length; i++)
+                {
+                    if (parti[i]["id_automobile"] == id_auto)
+                    {
+                        var option = document.createElement('option');
+                        option.text = parti[i]["nome"];
+                        option.value = parti[i]["id"]; 
+                        document.getElementById(parti[i]["categoria"]).appendChild(option);
+                    }
+                }
+            
+                // se è selezionata un'auto visualizzo il pulsante di submit
+                if (categorie_disponibili.length > 0)
+                {
+                    document.getElementById("prenota_pers").style.display = "block"; 
+                }
+            
+            
+            aggiorna_informazioni();
         }
-
-        function change_selected_kit()
+        
+        // aggiorno prezzo e descrizioni in base a cosa viene selezionato
+        function aggiorna_informazioni()
         {
-            var i, found = false;
+            prezzo = 0;
+            
+            // aggiungo il prezzo del bancaggio, se selezionato
+            if(document.getElementById("bancaggio").checked)
+            { prezzo += 50;}
+            
+            // trovo il kit selezionato nel database e aggiungo il suo prezzo
+            var i;
             for (i = 0; i < kit.length; i++)
             {
                 if(kit[i]["id"] == document.getElementById("select_kit").value)
                 {
+                    prezzo += parseFloat(kit[i]["prezzo"]);
+                    
                     document.getElementById("descrizione_kit").innerHTML = kit[i]["descrizione"];
-                    document.getElementById("prezzo_kit").innerHTML = kit[i]["prezzo"] + '€';
-                    found = true;
+
                     break;
                 }
             }
-            if(!found)
+            
+            // visualizzo il prezzo a schermo solo se esso è maggiore di zero
+            if(prezzo == 0)
             {
-                    document.getElementById("descrizione_kit").innerHTML = "";
-                    document.getElementById("prezzo_kit").innerHTML = "";
+                document.getElementById("descrizione_kit").innerHTML = "";
+                document.getElementById("prezzo_kit").innerHTML = "";
             }
-        }
-
-        function aggiorna_informazioni()
-        {
-            var prezzo;
-            if (document.getElementById("kit").style.display == "block")
+            else
             {
-                var i, found = false;
-                for (i = 0; i < kit.length; i++)
+                document.getElementById("prezzo_kit").innerHTML = prezzo + '€';
+            }
+            
+            
+            // per ogni menù a tendina delle categorie trovo il prezzo del valore selezionato e lo aggiungo
+            for (i = 0; i < categorie_disponibili.length; i++)
+            {
+                if(document.getElementById(categorie_disponibili[i]).value != "")
                 {
-                    if(kit[i]["id"] == document.getElementById("select_kit").value)
+                    var j;
+                    for (j = 0; j < parti.length; j++)
                     {
-                        document.getElementById("descrizione_kit").innerHTML = kit[i]["descrizione"];
-                        prezzo = parseFloat(kit[i]["prezzo"]);
-
-                        if(document.getElementById("bancaggio").checked)
+                        if(parti[j]["id"] == document.getElementById(categorie_disponibili[i]).value)
                         {
-                             prezzo += 50;
+                            prezzo += parseFloat(parti[j]["prezzo"]);
+                            break;
                         }
-
-                        document.getElementById("prezzo_kit").innerHTML = prezzo + '€';
-
-                        found = true;
-                        break;
                     }
                 }
             }
-            if(!found)
+            
+            // visualizzo il prezzo a schermo solo se esso è maggiore di zero
+            if(prezzo == 0)
             {
-                    document.getElementById("descrizione_kit").innerHTML = "";
-                    document.getElementById("prezzo_kit").innerHTML = "";
+                document.getElementById("prezzo_pers").innerHTML = "";
+            }
+            else
+            {
+                document.getElementById("prezzo_pers").innerHTML = prezzo + '€';
             }
         }
         
         function show_pers()
         {
+            // visualizzo sezione elaborazione personalizzata
             document.getElementById("pers").style.display = "block";
+            
+            // nascondo sezione kit
             document.getElementById("kit").style.display = "none";
+            
+            // cambio colore ai due pulsanti
             document.getElementById("pers_btn").classList.remove("btn-light");
             document.getElementById("pers_btn").classList.add("btn-dark");
             document.getElementById("kit_btn").classList.remove("btn-dark");
             document.getElementById("kit_btn").classList.add("btn-light");
+            
+            // svuoto la sezione kit
+            document.getElementById("select_kit").value = "";
+            document.getElementById("prezzo_kit").innerHTML = "";
+            document.getElementById("descrizione_kit").innerHTML = "";
+            
+            // aggiorno il prezzo
+            prezzo = 0;
+            if(document.getElementById("bancaggio").checked)
+            {
+                prezzo += 50;
+                document.getElementById("prezzo_pers").innerHTML = prezzo + '€';
+            }
         }
 
         function show_kit()
         {
-            try{
+            // nascondo sezione elaborazione personalizzata
             document.getElementById("pers").style.display = "none";
+            
+            // visualizzo sezione kit
             document.getElementById("kit").style.display = "block";
+            
+            // cambio colore ai due pulsanti
             document.getElementById("kit_btn").classList.remove("btn-light");
             document.getElementById("kit_btn").classList.add("btn-dark");
             document.getElementById("pers_btn").classList.remove("btn-dark");
             document.getElementById("pers_btn").classList.add("btn-light");
-            }catch(error){console.log(error);}
+            
+            // svuoto la sezione kit
+            document.getElementById("prezzo_pers").innerHTML = "";
+            var i;
+            for (i = 0; i < categorie_disponibili.length; i++)
+            {
+                document.getElementById(categorie_disponibili[i]).value = "";
+            }
+            
+            // aggiorno il prezzo
+            prezzo = 0;
+            if(document.getElementById("bancaggio").checked)
+            {
+                prezzo += 50;
+                document.getElementById("prezzo_kit").innerHTML = prezzo + '€';
+            }
         }
         
     </script>
@@ -283,9 +391,26 @@
                             <div id="pers" style="display: none;">
 
 
-                                <!--...-->
+                                <div class="row">
+                                
+                                    <div class="col" id="pers_col">
+                                    
+                                        <br>
 
-                                <button type="submit" class="btn btn-primary" name="submit" value="pers">Prenota</button>
+                                    </div>
+                                    
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col">
+                                        <br>
+                                        <p id="prezzo_pers" style="color:black;"></p>
+                                        <button type="submit" class="btn btn-primary" name="submit" value="kit" id="prenota_pers">Prenota</button>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <!--SELEZIONA KIT-->
@@ -372,8 +497,8 @@
           <div class="col-md-12 text-center">
 
             <p>
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Pignata Marcello, tutti i diritti riservati
-              </p>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> Pignata Marcello, tutti i diritti riservati
+            </p>
           </div>
         </div>
       </div>
