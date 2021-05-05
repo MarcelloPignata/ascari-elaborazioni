@@ -329,8 +329,8 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item active"><a href="prenota.html" class="nav-link">Prenota elaborazione</a></li>
-	          <li class="nav-item"><a href="pricing.html" class="nav-link">Prove su banco</a></li>
+	          <li class="nav-item active"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
+	          <li class="nav-item"><a href="banco.html" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="car.html" class="nav-link">Eventi</a></li>
 	          <li class="nav-item"><a href="contact.html" class="btn btn-info nav-link">Login</a></li>
 	        </ul>
@@ -338,7 +338,7 @@
 	    </div>
 	  </nav>
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -455,7 +455,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2"><a href="#" class="logo">Ascari<span>Elaborazioni</span></a></h2>
-              <p>In memoria di Pitorri Giuseppe</p>
+              <p>Progetto di maturità di Marcello Pignata, 5°B Informatico, IIS Jean Monnet, Mariano Comense (CO)</p>
             </div>
           </div>
           <div class="col-md">
@@ -474,7 +474,7 @@
               <ul class="list-unstyled">
                 <li><a href="index.html" class="py-2 d-block">Home</a></li>
                 <li><a href="prenota.php" class="py-2 d-block">Prenota elaborazione</a></li>
-                <li><a href="#" class="py-2 d-block">Prove su banco</a></li>
+                <li><a href="banco.html" class="py-2 d-block">Prove su banco</a></li>
                 <li><a href="#" class="py-2 d-block">Eventi</a></li>
                 <li><a href="#" class="py-2 d-block">Login</a></li>
               </ul>
