@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Prove su banco</title>
+    <title>Ascari Elaborazioni - Eventi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+      
+    <link rel="icon" type="image/png" href="images/logo.png">
          
   </head>
   <body>
@@ -42,7 +44,7 @@
 	          <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
 	          <li class="nav-item"><a href="banco.html" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item active"><a href="eventi.php" class="nav-link">Eventi</a></li>
-	          <li class="nav-item"><a href="contact.html" class="btn btn-info nav-link">Login</a></li>
+	          <li class="nav-item"><a href="login.html" class="btn btn-info nav-link">Accedi</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -134,7 +136,7 @@
                 <li><a href="prenota.php" class="py-2 d-block">Prenota elaborazione</a></li>
                 <li><a href="banco.html" class="py-2 d-block">Prove su banco</a></li>
                 <li><a href="eventi.php" class="py-2 d-block">Eventi</a></li>
-                <li><a href="#" class="py-2 d-block">Login</a></li>
+                <li><a href="login.html" class="py-2 d-block">Accedi</a></li>
               </ul>
             </div>
           </div>
