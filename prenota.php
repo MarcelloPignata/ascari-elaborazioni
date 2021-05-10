@@ -8,9 +8,7 @@
     $dbname = "ascari-elaborazioni";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
+    if ($conn->connect_error){echo "<script>alert('errore php')</script>"}
 
     $sql = "SELECT * FROM automobili";
     $result = $conn->query($sql);
@@ -134,7 +132,7 @@
             
             // KIT
             
-                var select_kit = document.getElementById("select_kit");
+                var select_kit = document.getElementById("id_kit");
 
                 // svuoto il menù a tendina della selezione kit
                 var i, L = select_kit.options.length - 1;
@@ -219,7 +217,7 @@
             var i;
             for (i = 0; i < kit.length; i++)
             {
-                if(kit[i]["id"] == document.getElementById("select_kit").value)
+                if(kit[i]["id"] == document.getElementById("id_kit").value)
                 {
                     prezzo += parseFloat(kit[i]["prezzo"]);
                     
@@ -289,7 +287,7 @@
             document.getElementById("kit_btn").classList.add("btn-light");
             
             // svuoto la sezione kit
-            document.getElementById("select_kit").value = "";
+            document.getElementById("id_kit").value = "";
             document.getElementById("prezzo_kit").innerHTML = "";
             document.getElementById("descrizione_kit").innerHTML = "";
             
@@ -465,7 +463,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label></label>
-                                            <select class="form-control" id="select_kit" onchange="aggiorna_informazioni();">
+                                            <select class="form-control" name="id_kit" id="id_kit" onchange="aggiorna_informazioni();">
                                                 <option value="">Seleziona kit...</option>
                                             </select>
                                         </div>
