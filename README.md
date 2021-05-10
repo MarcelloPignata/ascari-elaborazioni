@@ -5,7 +5,7 @@ ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazion
 
 * [Utilizzo](#utilizzo)
 * [Installazione](#installazione)
-* [Stato di sviluppo services](#stato-di-sviluppo)
+* [Stato di sviluppo](#stato-di-sviluppo)
 * [Query notevoli](#query-notevoli)
 * [Contributi](#contributi)
 * [Crediti](#crediti)
