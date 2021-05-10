@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -113,7 +114,7 @@
 
             .login { 
                 position: absolute;
-                top: 40%;
+                top: 30%;
                 left: 50%;
                 margin: -150px 0 0 -150px;
                 width:300px;
@@ -159,6 +160,124 @@
               opacity: 1;
             }
         </style>
+      
+      <script>
+          
+            function enablePassword2()
+            {
+                if(document.getElementById("password1").value != "")
+                {
+                    document.getElementById("password2").disabled = false;
+                }
+                else
+                {
+                    document.getElementById("password2").disabled = true;
+                }
+            }
+        
+            function Controlli()
+            {
+                var p = document.getElementById("errore");
+              
+                var nome = document.getElementById("nome");
+                var cognome = document.getElementById("cognome");
+                var telefono = document.getElementById("telefono");
+                var email = document.getElementById("email");
+                var password1 = document.getElementById("password1");
+                var password2 = document.getElementById("password2");
+              
+                p.innerHTML = "";
+                
+                nome.style.borderColor = "rgba(0,0,0,0.3)";
+                cognome.style.borderColor = "rgba(0,0,0,0.3)";
+                telefono.style.borderColor = "rgba(0,0,0,0.3)";
+                email.style.borderColor = "rgba(0,0,0,0.3)";
+                password1.style.borderColor = "rgba(0,0,0,0.3)";
+                password2.style.borderColor = "rgba(0,0,0,0.3)";
+                
+                
+                // NOME
+                if(nome.value == "")
+                {
+                    p.innerHTML += "Inserisci un nome<br>";
+                }
+                else if(!/^[a-zA-Z\s]*$/.test(nome.value))
+                { 
+                    p.innerHTML += "Inserisci un nome valido<br>";
+                }
+                else if(nome.value.length > 20)
+                {
+                    p.innerHTML += "Inserisci un nome più corto<br>";
+                }
+              
+                // COGNOME
+                if(cognome.value == "")
+                {
+                    p.innerHTML += "Inserisci un cognome<br>";
+                }
+                else if(!/^[a-zA-Z\s]*$/.test(cognome.value))
+                { 
+                    p.innerHTML += "Inserisci un cognome valido<br>";
+                }
+                else if(cognome.value.length > 20)
+                {
+                    p.innerHTML += "Inserisci un cognome più corto<br>";
+                }
+                
+                // TELEFONO
+                if(telefono.value == "")
+                {
+                    p.innerHTML += "Inserisci un numero di telefono<br>";
+                }
+                else if(!/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g.test(telefono.value) || telefono.value.length < 10)
+                { 
+                    p.innerHTML += "Inserisci un numero di telefono valido<br>";
+                }
+                else if(telefono.value.length > 20)
+                {
+                    p.innerHTML += "Inserisci un numero più corto<br>";
+                }
+                
+                // EMAIL
+                if(email.value == "")
+                {
+                    p.innerHTML += "Inserisci una mail<br>";
+                }
+                else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email.value))
+                { 
+                    p.innerHTML += "Inserisci una mail valida<br>";
+                }
+                else if(email.value.length > 254)
+                {
+                    p.innerHTML += "Inserisci una mail più corta<br>";
+                }
+                
+                //PASSWORD
+                if(password1.value == "")
+                {
+                    p.innerHTML += "Inserisci una password<br>";
+                }
+                else if (password1.value != password2.value)
+                {
+                    p.innerHTML += "Le password non coincidono<br>";
+                }
+                else if(password1.value.length > 20)
+                {
+                    p.innerHTML += "Inserisci una password più corta<br>";
+                }
+                
+                if (p.innerHTML == "")
+                {
+                    document.getElementById("submit").click();
+                }
+                
+                try
+                {
+                    document.getElementById("phperror").innerHTML = "";
+                }catch(error){}
+            }
+          
+      </script>
   </head>
   <body>
     
@@ -166,14 +285,25 @@
       <div class="overlay"></div>
       <div class="container">
           <div class="login">
-            <h1></h1>
-            <form method="post">
+            <form action="query.php" method="post">
                 <p><img src="images/logo_AE.png" style="height: 10vh"></p>
-                <input type="text" name="email" placeholder="Email" required="required" />
-                <input type="password" name="password" placeholder="Password" required="required" />
-                <button type="submit" class="btn btn-block btn-large">Login</button>
+                <input type="text" name="nome" id="nome" placeholder="Nome" required/>
+                <input type="text" name="cognome" id="cognome" placeholder="Cognome" required/>
+                <input type="text" name="telefono" id="telefono" placeholder="Telefono" required/>
+                <input type="text" name="email" id="email" placeholder="Email" required="required" />
+                <input type="password" name="password1" id="password1" placeholder="Password" oninput="enablePassword2();"  required/>
+                <input type="password" name="password2" id="password2" placeholder="Ripeti password" required disabled/>
+                <button type="button" class="btn btn-block btn-large" onclick="Controlli();">Registrati</button>
+                <button type="submit" name="registrazione" id="submit" hidden></button>
                 <br>
-                <p style="color:white;">Altrimenti, <a href="registrazione.html" style="color: #09825b ; font-weight: bold;">registrati!</a></p>
+                <p style="color:white;">Già registrato? <a href="login.php" style="color: #09825b ; font-weight: bold;">Accedi!</a></p>
+                <p style="color: #d90000;" id="errore"></p>
+                <?php
+                    if(isset($_GET["failed"]))
+                    {
+                        echo '<p style="color: #d90000;" id="phperror">Email già registrata</p>';
+                    }
+                ?>
             </form>
       </div>
     </div>

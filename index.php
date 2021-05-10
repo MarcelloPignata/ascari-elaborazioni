@@ -1,11 +1,11 @@
 <?php
     session_start();
-    $_SESSION["page"] = "eventi";
+    $_SESSION["page"] = "index";
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Eventi</title>
+    <title>Ascari Elaborazioni</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -31,7 +31,6 @@
     <link rel="stylesheet" href="css/style.css">
       
     <link rel="icon" type="image/png" href="images/logo.png">
-         
   </head>
   <body>
     
@@ -44,11 +43,12 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
 	          <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
-	          <li class="nav-item active"><a href="eventi.php" class="nav-link">Eventi</a></li>
-	          <?php
+	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
+                
+                <?php
                     if(isset($_SESSION["nome"]))
                     {
 	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link">'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
@@ -57,70 +57,106 @@
                     {
                         echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
                     }
-               ?>
+                ?>
+                
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_4.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpeg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-          <div class="col-md-9 ftco-animate pb-5">
-            <h1 class="mb-3 bread">Eventi</h1>
+        <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+          <div class="col-lg-8 ftco-animate">
+          	<div class="text w-100 text-center mb-md-5 pb-md-5">
+	            <h1 class="mb-4">Dietro ogni grande pilota c'è sempre una grande officina</h1>
+	            <p style="font-size: 18px;">Passione e tecnica dal 1992</p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="ftco-section contact-section">
-        <div class="container">
-            <div class="col-md-12">
-                <?php
-                
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "ascari-elaborazioni";
-                    
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    if ($conn->connect_error) {
-                      die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    $sql = "SELECT * FROM eventi";
-                    $result = $conn->query($sql);
-                    $automobili = array();
-                    if ($result->num_rows > 0)
-                    {
-                        echo '<div class="list-group">';
-                        
-                        while($row = $result->fetch_assoc())
-                        {
-                            echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">'.$row["nome"].'</h5>
-                                            <button type="button" class="btn btn-info" id="'.$row["id"].'">Iscriviti</button>
-                                        </div>
-                                        <p class="mb-1">'.$row["descrizione"].'</p>
-                                        <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
-                                        <p class="mb-1">Contatti: '.$row["contatti"].'</p>
-                                    </div>';
-                        }
-                        
-                        echo '</div>';
-                    }
-                    else
-                    {
-                      echo "<h4>Al momento non ci sono eventi in programma</h4>";
-                    }
-                
-                ?>
-            </div>
+    </div>
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Servizi</span>
+            <h2 class="mb-3">La nostra offerta</h2>
+          </div>
         </div>
-    </section>
-	
+				<div class="row">
+					<div class="col-md-3">
+						<div class="services services-2 w-100 text-center">
+            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+            	<div class="text w-100">
+                <h3 class="heading mb-2">Elaborazioni personalizzate</h3>
+                <p>Seleziona le componenti che vorresti vedere sulla tua auto e al resto ci pensiamo noi!</p>
+              </div>
+            </div>
+					</div>
+					<div class="col-md-3">
+						<div class="services services-2 w-100 text-center">
+            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+            	<div class="text w-100">
+                <h3 class="heading mb-2">Stage tuning</h3>
+                <p>Affidati ad uno dei nostri kit specifici per la tua auto, al migliore dei prezzi!</p>
+              </div>
+            </div>
+					</div>
+					<div class="col-md-3">
+						<div class="services services-2 w-100 text-center">
+            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-suv"></span></div>
+            	<div class="text w-100">
+                <h3 class="heading mb-2">Prove su banco</h3>
+                <p>Qualsiasi sia la potenza e la coppia, vieni a scoprirlo sul nostro banco di prova!</p>
+              </div>
+            </div>
+					</div>
+					<div class="col-md-3">
+						<div class="services services-2 w-100 text-center">
+            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
+            	<div class="text w-100">
+                <h3 class="heading mb-2">Eventi</h3>
+                <p>Consulta il nostro calendario di selezione di eventi tuning e automotivi!</p>
+              </div>
+            </div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
+			<div class="overlay"></div>
+    	<div class="container">
+    		<div class="row">
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="29">0</strong>
+                <span>Anni di <br>esperienza</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="1090">0</strong>
+                <span>Elaborazioni <br>effettuate</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="1347">0</strong>
+                <span>Clienti <br>soddisfatti</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>	
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -179,7 +215,6 @@
     
   
 
-  <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 

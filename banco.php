@@ -1,7 +1,11 @@
+<?php
+    session_start();
+    $_SESSION["page"] = "banco";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni</title>
+    <title>Ascari Elaborazioni - Prove su banco</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -27,121 +31,101 @@
     <link rel="stylesheet" href="css/style.css">
       
     <link rel="icon" type="image/png" href="images/logo.png">
+      
+    <script>
+      
+        function avvio()
+        {
+            // imposto data minima selezionabile
+            var tomorrow = new Date();
+            tomorrow.setDate(new Date().getDate()+1);
+            var dd = tomorrow.getDate();
+            var mm = tomorrow.getMonth()+1;
+            var yyyy = tomorrow.getFullYear();
+            if(dd<10){dd='0'+dd;} 
+            if(mm<10){mm='0'+mm;} 
+            var date = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("data").setAttribute("min", date); 
+        }
+      
+    </script>    
   </head>
-  <body>
+  <body onload="avvio();">
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Ascari<span>Elaborazioni</span></a>
+	      <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
-	          <li class="nav-item"><a href="banco.html" class="nav-link">Prove su banco</a></li>
+	          <li class="nav-item active"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
-	          <li class="nav-item"><a href="login.html" class="btn btn-info nav-link">Accedi</a></li>
+	          <?php
+                    if(isset($_SESSION["nome"]))
+                    {
+	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link">'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+                    }
+                    else
+                    {
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
+                    }
+               ?>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     
-    <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpeg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
-        <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
-          <div class="col-lg-8 ftco-animate">
-          	<div class="text w-100 text-center mb-md-5 pb-md-5">
-	            <h1 class="mb-4">Dietro ogni grande pilota c'è sempre una grande officina</h1>
-	            <p style="font-size: 18px;">Passione e tecnica dal 1992</p>
-            </div>
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+            <h1 class="mb-3 bread">Prove su banco</h1>
           </div>
         </div>
       </div>
-    </div>
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-          	<span class="subheading">Servizi</span>
-            <h2 class="mb-3">La nostra offerta</h2>
-          </div>
-        </div>
-				<div class="row">
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Elaborazioni personalizzate</h3>
-                <p>Seleziona le componenti che vorresti vedere sulla tua auto e al resto ci pensiamo noi!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Stage tuning</h3>
-                <p>Affidati ad uno dei nostri kit specifici per la tua auto, al migliore dei prezzi!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-suv"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Prove su banco</h3>
-                <p>Qualsiasi sia la potenza e la coppia, vieni a scoprirlo sul nostro banco di prova!</p>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-3">
-						<div class="services services-2 w-100 text-center">
-            	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
-            	<div class="text w-100">
-                <h3 class="heading mb-2">Eventi</h3>
-                <p>Consulta il nostro calendario di selezione di eventi tuning e automotivi!</p>
-              </div>
-            </div>
-					</div>
-				</div>
-			</div>
-		</section>
+    </section>
 
-    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
-			<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row">
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="29">0</strong>
-                <span>Anni di <br>esperienza</span>
-              </div>
+    <section class="ftco-section contact-section">
+        <div class="container">
+                <div class="col-md-12">
+                    <h4>Prenota prova su banco</h4>
+                <form>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="data">Data</label>
+                                <input type="date" class="form-control" id="data" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                
+                                <label for="ora" class="col-2 col-form-label">Ora</label>
+                                <input class="form-control" type="time"  min="09:00" max="20:00" required id="ora">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary" name="submit" value="kit" id="prenota_banco">Prenota</button>
+                        </div>
+
+                    </div>
+                    
+                </form>
             </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1090">0</strong>
-                <span>Elaborazioni <br>effettuate</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1347">0</strong>
-                <span>Clienti <br>soddisfatti</span>
-              </div>
-            </div>
-          </div>
         </div>
-    	</div>
-    </section>	
+    </section>
+	
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -154,23 +138,22 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Informazioni</h2>
+              <h2 class="ftco-heading-2">Link esterni</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Su di noi</a></li>
-                <li><a href="#" class="py-2 d-block">Contatti</a></li>
+                <li><a href="amministrazione.php" class="py-2 d-block">Amministrazione</a></li>
                 <li><a href="https://github.com/MarcelloPignata/ascari-elaborazioni" class="py-2 d-block">Github</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Link</h2>
+              <h2 class="ftco-heading-2">Servizi</h2>
               <ul class="list-unstyled">
-                <li><a href="index.html" class="py-2 d-block">Home</a></li>
+                <li><a href="index.php" class="py-2 d-block">Home</a></li>
                 <li><a href="prenota.php" class="py-2 d-block">Prenota elaborazione</a></li>
-                <li><a href="banco.html" class="py-2 d-block">Prove su banco</a></li>
+                <li><a href="banco.php" class="py-2 d-block">Prove su banco</a></li>
                 <li><a href="eventi.php" class="py-2 d-block">Eventi</a></li>
-                <li><a href="login.html" class="py-2 d-block">Accedi</a></li>
+                <li><a href="login.php" class="py-2 d-block">Accedi</a></li>
               </ul>
             </div>
           </div>
@@ -201,6 +184,7 @@
     
   
 
+  <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 

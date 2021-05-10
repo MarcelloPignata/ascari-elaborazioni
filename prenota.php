@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $_SESSION["page"] = "prenota";
 
     $servername = "localhost";
     $username = "root";
@@ -323,18 +325,27 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Ascari<span>Elaborazioni</span></a>
+	      <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
 	          <li class="nav-item active"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
-	          <li class="nav-item"><a href="banco.html" class="nav-link">Prove su banco</a></li>
+	          <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
-	          <li class="nav-item"><a href="login.html" class="btn btn-info nav-link">Accedi</a></li>
+	          <?php
+                    if(isset($_SESSION["nome"]))
+                    {
+	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link">'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+                    }
+                    else
+                    {
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
+                    }
+               ?>
 	        </ul>
 	      </div>
 	    </div>
@@ -462,23 +473,22 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Informazioni</h2>
+              <h2 class="ftco-heading-2">Link esterni</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Su di noi</a></li>
-                <li><a href="#" class="py-2 d-block">Contatti</a></li>
+                <li><a href="amministrazione.php" class="py-2 d-block">Amministrazione</a></li>
                 <li><a href="https://github.com/MarcelloPignata/ascari-elaborazioni" class="py-2 d-block">Github</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Link</h2>
+              <h2 class="ftco-heading-2">Servizi</h2>
               <ul class="list-unstyled">
-                <li><a href="index.html" class="py-2 d-block">Home</a></li>
+                <li><a href="index.php" class="py-2 d-block">Home</a></li>
                 <li><a href="prenota.php" class="py-2 d-block">Prenota elaborazione</a></li>
-                <li><a href="banco.html" class="py-2 d-block">Prove su banco</a></li>
+                <li><a href="banco.php" class="py-2 d-block">Prove su banco</a></li>
                 <li><a href="eventi.php" class="py-2 d-block">Eventi</a></li>
-                <li><a href="login.html" class="py-2 d-block">Accedi</a></li>
+                <li><a href="login.php" class="py-2 d-block">Accedi</a></li>
               </ul>
             </div>
           </div>
@@ -501,6 +511,7 @@
             <p>
                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> Pignata Marcello, tutti i diritti riservati
             </p>
+              
           </div>
         </div>
       </div>
