@@ -68,7 +68,7 @@
 	          <?php
                     if(isset($_SESSION["nome"]))
                     {
-	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link">'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
                     }
                     else
                     {
