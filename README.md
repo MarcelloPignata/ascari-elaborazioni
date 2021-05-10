@@ -12,12 +12,10 @@ ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazion
 * [Licenza](#licenza)
 * [Ringraziamenti](#ringraziamenti)
 
-<a name="utilizzo"/>
 ## Utilizzo
 	 
 TODO (spiegare varie sezioni e cosa fanno)
 
-<a name="installazione"/>
 ## Installazione
 * Per il completo e corretto funzionamento del portale tramite installazione in locale è necessaria l'installazione del software [XAMPP](https://www.apachefriends.org/).
 * Una volta installato e aperto il programma sarà necessario avviare i moduli  "Apache" e "MySQL".
@@ -26,7 +24,6 @@ TODO (spiegare varie sezioni e cosa fanno)
 * Tramite phpMyAdmin si dovrà creare un nuovo database chiamato "ascari-elaborazioni", e effettuare l'importazione del database utilizzando il file "ascari-elaborazioni.sql", presente tra i file del progetto.
 * Il portale sarà ora funzionante e accessibile tramite browser all'indirizzo `localhost/ascari-elaborazioni`
 
-<a name="stato-di-sviluppo"/>
 ## Stato di sviluppo
 * ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+) Homepage: `quasi terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prenota elaborazione: `terminata`
@@ -37,7 +34,6 @@ TODO (spiegare varie sezioni e cosa fanno)
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Area Utente: `da implementare`
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
 
-<a name="query-notevoli"/>
 ## Query notevoli
 
 * Visualizza tutte le prenotazione e le parti ad esse collegate
@@ -62,13 +58,11 @@ INNER JOIN automobili aut
     on pre.id_automobile = aut.id
 ```
 
-<a name="contributi"/>
 ## Contributi
 Essendo questo un progetto personale e soggetto a valutazione, non mi è possibile accettare contributi.
 
 Sono ben accette segnalazioni di bug e difetti tramite l'apertura di issue.
 
-<a name="crediti"/>
 ## Crediti
 La base estetica della piattaforma è una versione modificata di un template di Bootstrap a cura di [joefrey](https://colorlib.com/wp/author/joefreymahusay/).
 
@@ -80,7 +74,6 @@ Le immagini di sfondo sono state ottenute tramite il motore di ricerca Google.
 
 Tutto il resto del codice (struttura del database, elementi delle pagine, estetica e funzionamento dei form, comunicazione coi database tramite PHP, interazione e comunicazione tra pagine, etc...) è stato scritto interamente da me.
 
-<a name="licenza"/>
 ## Licenza
 Copyright (c) 2021 Pignata Marcello
 
@@ -90,6 +83,5 @@ L'avviso di copyright indicato sopra e questo avviso di autorizzazione devono es
 
 IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPLICITE O IMPLICITE, IVI INCLUSE, IN VIA ESEMPLIFICATIVA, LE GARANZIE DI COMMERCIABILITÀ, IDONEITÀ A UN FINE PARTICOLARE E NON VIOLAZIONE DEI DIRITTI ALTRUI. IN NESSUN CASO GLI AUTORI O I TITOLARI DEL COPYRIGHT SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRO TIPO DI RESPONSABILITÀ, A SEGUITO DI AZIONE CONTRATTUALE, ILLECITO O ALTRO, DERIVANTE DA O IN CONNESSIONE AL SOFTWARE, AL SUO UTILIZZO O AD ALTRE OPERAZIONI CON LO STESSO.
 
-<a name="ringraziamenti"/>
 ## Ringraziamenti
 TODO
