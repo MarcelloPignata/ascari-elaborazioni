@@ -1,4 +1,4 @@
-# ascari-elaborazioni
+# Ascari Elaborazioni
 Portale web dell'officina fittizia "Ascari Elaborazioni", progetto di maturità di Pignata Marcello per l'IIS Jean Monnet, Mariano Comense (CO) per l'anno scolastico 2020-2021
 
 ## Query notevoli
