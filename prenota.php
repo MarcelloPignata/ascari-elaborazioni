@@ -76,6 +76,15 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
       
+    <style>
+        
+        #bancaggio {
+            width: 20px;
+            height: 20px;
+        }
+        
+    </style>
+      
     <script>
         
         // array contenenti i dati del database
@@ -389,14 +398,25 @@
 
                     <div class="row">
                         <div class="col">
-                            <input type="button" class="btn btn-light" onclick="show_pers()" id="pers_btn" value="Elaborazione personalizzata">
-                            <input type="button" class="btn btn-light" onclick="show_kit()" id="kit_btn" value="Selezione kit">
+                            <div class="form-group">
+                                <label for="targa">Targa</label>
+                                <input type="text" class="form-control" id="targa" required>
+                            </div>
                         </div>
-                        <div class="col">
+                        <div class="col h5 d-flex align-items-end justify-content-center">
+                            
+                            <div class="form-group">
                                 <input class="form-check-input" type="checkbox" id="bancaggio" onclick="aggiorna_informazioni();">
-                                <label class="form-check-label" for="bancaggio" style="color:black;" >
-                                    Bancaggio post-elaborazione
-                                </label>
+                                <label class="form-check-label" for="bancaggio" style="color:black;" >&nbsp;Bancaggio post-elaborazione</label>
+                            </div></div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-light" onclick="show_pers()" id="pers_btn" value="Elaborazione personalizzata">
+                                <input type="button" class="btn btn-light" onclick="show_kit()" id="kit_btn" value="Selezione kit">
+                            </div>
                         </div>
                     </div>
 
