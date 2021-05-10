@@ -20,7 +20,7 @@
         array_push($automobili,$row);
       }
     } else {
-      echo "0 results";
+      echo "<script>alert('errore php')</script>";
     }
 
     $sql = "SELECT * FROM kit";
@@ -31,7 +31,7 @@
         array_push($kit,$row);
       }
     } else {
-      echo "0 results";
+      echo "<script>alert('errore php')</script>";
     }
 
     $sql = "SELECT * FROM parti";
@@ -42,7 +42,7 @@
         array_push($parti,$row);
       }
     } else {
-      echo "0 results";
+      echo "<script>alert('errore php')</script>";
     }
 ?>
 
@@ -181,7 +181,7 @@
                 // creo un menù a tendina per ogni categoria disponibile
                 for (i = 0; i < categorie_disponibili.length; i++)
                 {
-                    pers_col.innerHTML += '<label>' + categorie_disponibili[i] + '</label><select class="form-control" id="' + categorie_disponibili[i] + '" onchange="aggiorna_informazioni();"> <option></option> </select>';
+                    pers_col.innerHTML += '<label>' + categorie_disponibili[i] + '</label><select class="form-control" name="'  + categorie_disponibili[i].replace(/\s/g, '') +  '" id="' + categorie_disponibili[i] + '" onchange="aggiorna_informazioni();"> <option></option> </select>';
                 }
             
                 // aggiungo ad ogni menù a tendina le rispettive opzioni
@@ -267,6 +267,11 @@
             {
                 document.getElementById("prezzo_pers").innerHTML = prezzo + '€';
             }
+            
+            document.getElementById("preventivo").value = prezzo;
+            
+            
+            try{document.getElementById("phptext").innerHTML = "";}catch(error){};
         }
         
         function show_pers()
@@ -295,6 +300,8 @@
                 prezzo += 50;
                 document.getElementById("prezzo_pers").innerHTML = prezzo + '€';
             }
+            
+            try{document.getElementById("phptext").innerHTML = "";}catch(error){};
         }
 
         function show_kit()
@@ -326,6 +333,8 @@
                 prezzo += 50;
                 document.getElementById("prezzo_kit").innerHTML = prezzo + '€';
             }
+            
+            try{document.getElementById("phptext").innerHTML = "";}catch(error){};
         }
         
     </script>
@@ -375,13 +384,15 @@
         <div class="container">
                 <div class="col-md-12">
 
-                <form>
+                <form action="query.php" method="post">
+                    
+                    <input type="number" name="preventivo" id="preventivo" readonly hidden>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="select_auto">Automobile</label>
-                                <select class="form-control" id="select_auto" onchange="change_selected_auto();" required>
+                                <select class="form-control" name="id_automobile" id="select_auto" onchange="change_selected_auto();" required>
                                     <option></option>
                                 </select>
                             </div>
@@ -389,7 +400,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="data">Data</label>
-                                <input type="date" class="form-control" id="data" required>
+                                <input type="date" name="data" class="form-control" id="data" required>
                             </div>
                         </div>
                     </div>
@@ -400,13 +411,13 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="targa">Targa</label>
-                                <input type="text" class="form-control" id="targa" required>
+                                <input type="text" class="form-control" name="targa" id="targa" required>
                             </div>
                         </div>
                         <div class="col h5 d-flex align-items-end justify-content-center">
                             
                             <div class="form-group">
-                                <input class="form-check-input" type="checkbox" id="bancaggio" onclick="aggiorna_informazioni();">
+                                <input class="form-check-input" type="checkbox" name="bancaggio" id="bancaggio" onclick="aggiorna_informazioni();">
                                 <label class="form-check-label" for="bancaggio" style="color:black;" >&nbsp;Bancaggio post-elaborazione</label>
                             </div></div>
                     </div>
@@ -428,7 +439,7 @@
                                 
                                     <div class="col" id="pers_col">
                                     
-                                        <br>
+                                        <!--...-->
 
                                     </div>
                                     
@@ -440,7 +451,7 @@
                                     <div class="col">
                                         <br>
                                         <p id="prezzo_pers" style="color:black;"></p>
-                                        <button type="submit" class="btn btn-primary" name="submit" value="kit" id="prenota_pers">Prenota</button>
+                                        <button type="submit" class="btn btn-primary" name="elaborazione_personalizzata" id="prenota_pers">Prenota</button>
                                     </div>
 
                                 </div>
@@ -454,7 +465,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label></label>
-                                            <select class="form-control" id="select_kit" onchange="aggiorna_informazioni();" required>
+                                            <select class="form-control" id="select_kit" onchange="aggiorna_informazioni();">
                                                 <option value="">Seleziona kit...</option>
                                             </select>
                                         </div>
@@ -471,12 +482,22 @@
 
                                     <div class="col">
                                         <p id="prezzo_kit" style="color:black;"></p>
-                                        <button type="submit" class="btn btn-primary" name="submit" value="kit">Prenota</button>
+                                        <button type="submit" class="btn btn-primary" name="elaborazione_kit">Prenota</button>
                                     </div>
 
                                 </div>
                             </div>
                 </form>
+                <?php
+                    if(isset($_GET["success"]))
+                    {
+                        echo '<p style="color: green;" id="phptext">Prenotazione inserita con successo</p>';
+                    }
+                    else if(isset($_GET["error"]))
+                    {
+                        echo '<p style="color: #d90000;" id="phptext">Errore nella registrazione della prenotazione</p>';
+                    }
+                ?>
             </div>
         </div>
     </section>

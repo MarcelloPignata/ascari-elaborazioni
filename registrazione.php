@@ -271,9 +271,15 @@
                     document.getElementById("submit").click();
                 }
                 
+                
                 try
                 {
-                    document.getElementById("phperror").innerHTML = "";
+                    document.getElementById("phperror1").innerHTML = "";
+                }catch(error){}
+                
+                try
+                {
+                    document.getElementById("phperror2").innerHTML = "";
                 }catch(error){}
             }
           
@@ -299,9 +305,13 @@
                 <p style="color:white;">Già registrato? <a href="login.php" style="color: #09825b ; font-weight: bold;">Accedi!</a></p>
                 <p style="color: #d90000;" id="errore"></p>
                 <?php
-                    if(isset($_GET["failed"]))
+                    if(isset($_GET["alreadyexist"]))
                     {
-                        echo '<p style="color: #d90000;" id="phperror">Email già registrata</p>';
+                        echo '<p style="color: #d90000;" id="phperror1">Email già registrata</p>';
+                    }
+                if(isset($_GET["failed"]))
+                    {
+                        echo '<p style="color: #d90000;" id="phperror2">Errore nella registrazione</p>';
                     }
                 ?>
             </form>
