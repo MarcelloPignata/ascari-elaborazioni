@@ -6,7 +6,7 @@ Portale web dell'officina fittizia "Ascari Elaborazioni", progetto di maturità 
 Visualizza tutte le prenotazione e le rispettive parti
 ```sql
 SELECT 	pre.id AS 'ID prenotazione',
-		ute.nome AS 'Nome',
+	ute.nome AS 'Nome',
         ute.cognome AS 'Cognome',
         aut.modello AS 'Auto',
         pre.targa AS 'Targa',
