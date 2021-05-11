@@ -202,4 +202,55 @@
                 exit();
             }
         }
+
+
+
+
+    // REGISTRAZIONE EVENTI
+
+        else if(isset($_POST["iscrizione_evento"]))
+        {
+            // ottengo tutti i dati inviati dal form
+            $id_utente = $_SESSION["id_utente"];
+            $id_evento = $_POST["id_evento"];
+            
+            // inserisco l'iscrizione nel database
+            $sql = "INSERT INTO iscrizioni_eventi (id_evento, id_utente) VALUES ('".$id_evento."', '".$id_utente."')";
+            if($conn->query($sql) === TRUE)
+            {
+                header('Location: eventi.php?successinsert=1');
+                exit();
+            }
+            else
+            {
+                header('Location: eventi.php?error=1');
+                exit();
+            }
+        }
+
+
+
+
+    // DISISCRIZIONE EVENTI
+
+        else if(isset($_POST["disiscrizione_evento"]))
+        {
+            
+            // ottengo tutti i dati inviati dal form
+            $id_utente = $_SESSION["id_utente"];
+            $id_evento = $_POST["id_evento"];
+            
+            // elimino l'iscrizione dal database
+            $sql = "DELETE FROM iscrizioni_eventi WHERE id_evento='".$id_evento."' AND id_utente='".$id_utente."'";
+            if($conn->query($sql) === TRUE)
+            {
+                header('Location: eventi.php?successdelete=1');
+                exit();
+            }
+            else
+            {
+                header('Location: eventi.php?error=1');
+                exit();
+            }
+        }
 ?>

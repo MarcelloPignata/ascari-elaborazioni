@@ -32,6 +32,22 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="css/user-dropdown.css">
+      
+    <script>
+        
+        function iscrivi_evento(id_evento)
+        {
+            document.getElementById("id_evento").value = id_evento;
+            document.getElementById("submit_iscrizione").click();
+        }
+        
+        function disiscrivi_evento(id_evento)
+        {
+            document.getElementById("id_evento").value = id_evento;
+            document.getElementById("submit_disiscrizione").click();
+        }
+        
+    </script>
          
   </head>
   <body>
@@ -91,6 +107,19 @@
                     if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}
                     else
                     {
+                        if(isset($_GET["successinsert"]))
+                        {
+                            echo '<br><p style="color: green;" id="phptext">Iscrizione inserita con successo</p>';
+                        }
+                        else if(isset($_GET["successdelete"]))
+                        {
+                            echo '<br><p style="color: green;" id="phptext">Iscrizione rimossa con successo</p>';
+                        }
+                        else if(isset($_GET["error"]))
+                        {
+                            echo '<br><p style="color: #d90000;" id="phptext">Errore PHP</p>';
+                        }
+                        
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
@@ -100,28 +129,51 @@
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         }
+                        
+                        $sql = "SELECT * FROM iscrizioni_eventi WHERE id_utente = ".$_SESSION["id_utente"];
+                        $result = $conn->query($sql);
+                        $iscrizioni = array();
+                        if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                            array_push($iscrizioni,$row["id_evento"]);
+                          }
+                        }
 
+                        
+                        
                         $sql = "SELECT * FROM eventi";
                         $result = $conn->query($sql);
-                        $automobili = array();
                         if ($result->num_rows > 0)
                         {
+                            echo '<form action="query.php" method="post">';
                             echo '<div class="list-group"'.'<?php if(!isset($_SESSION["id_utente"])){echo '."'".'style="display:none;"'."'".';}?>';
 
                             while($row = $result->fetch_assoc())
                             {
                                 echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1">'.$row["nome"].'</h5>
-                                                <button type="button" class="btn btn-info" id="'.$row["id"].'">Iscriviti</button>
-                                            </div>
+                                                <h5 class="mb-1">'.$row["nome"].'</h5>';
+                                
+                                if(!in_array($row["id"],$iscrizioni))
+                                {
+                                    echo '<button type="button" class="btn btn-info" onclick="iscrivi_evento('.$row["id"].')">Iscriviti</button>';
+                                }
+                                else
+                                {
+                                    echo '<button type="button" class="btn btn-success" onclick="disiscrivi_evento('.$row["id"].')">Disiscriviti</button>';
+                                }
+                                
+                                echo   '</div>
                                             <p class="mb-1">'.$row["descrizione"].'</p>
                                             <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
                                             <p class="mb-1">Contatti: '.$row["contatti"].'</p>
                                         </div>';
                             }
 
-                            echo '</div>';
+                            echo '<input type="number" name="id_evento" id="id_evento" readonly hidden>';
+                            echo '<button type="submit" name="iscrizione_evento" id="submit_iscrizione" hidden>';
+                            echo '<button type="submit" name="disiscrizione_evento" id="submit_disiscrizione" hidden>';
+                            echo '</div></form>';
                         }
                         else
                         {

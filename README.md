@@ -25,18 +25,17 @@ TODO (spiegare varie sezioni e cosa fanno)
 * Il portale sarà ora funzionante e accessibile tramite browser all'indirizzo `localhost/ascari-elaborazioni`
 
 ## Stato di sviluppo
-* ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+) Homepage: `quasi terminata`
+* ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Homepage: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prenota elaborazione: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prove su banco: `terminata`
-* ![#ff9900](https://via.placeholder.com/15/ff9900/000000?text=+) Eventi: `funzionamento da implementare`
-* ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+) Login: `quasi terminata`
+* ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Area Utente: `da implementare`
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
 
 ## Query notevoli
 
-* Visualizza tutte le prenotazione e le parti ad esse collegate
+* Visualizza tutte le prenotazioni di elaborazioni e le parti ad esse collegate
 ```sql
 SELECT 	pre.id AS 'ID prenotazione',
 	ute.nome AS 'Nome',
@@ -56,6 +55,18 @@ INNER JOIN utenti ute
     on pre.id_utente = ute.id
 INNER JOIN automobili aut
     on pre.id_automobile = aut.id
+```
+
+* Visualizza tutte le prenotazioni del banco di prova
+```sql
+SELECT  pre.id AS 'ID prenotazione',
+        ute.nome AS 'Nome',
+        ute.cognome AS 'Cognome',
+        pre.data AS 'Data',
+        pre.ora AS 'Ora'
+FROM prenotazioni_banco pre
+INNER JOIN utenti ute
+    on pre.id_utente = ute.id
 ```
 
 ## Contributi
