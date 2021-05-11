@@ -176,4 +176,30 @@
             header('Location: prenota.php?success=1');
             exit();
         }
+
+
+
+
+    // PRENOTAZIONE PROVA SU BANCO
+
+        else if(isset($_POST["banco"]))
+        {
+            // ottengo tutti i dati inviati dal form
+            $id_utente = $_SESSION["id_utente"];
+            $data = $_POST["data"];
+            $ora = $_POST["ora"];
+            
+            // inserisco la prenotazione nel database
+            $sql = "INSERT INTO prenotazioni_banco (id, id_utente, data, ora) VALUES (DEFAULT, '".$id_utente."', '".$data."', '".$ora."')";
+            if($conn->query($sql) === TRUE)
+            {
+                header('Location: banco.php?success=1');
+                exit();
+            }
+            else
+            {
+                header('Location: banco.php?error=1');
+                exit();
+            }
+        }
 ?>

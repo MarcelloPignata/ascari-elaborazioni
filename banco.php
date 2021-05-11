@@ -104,19 +104,20 @@
         <div class="container">
                 <div class="col-md-12">
                     <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
-                <form <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
+                <form action="query.php" method="post"<?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
+                    <h5>Si ricorda che il prezzo di una prova su banco ammonta a 50€</h5><br>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="data">Data</label>
-                                <input type="date" class="form-control" id="data" required>
+                                <input type="date" class="form-control" name="data" id="data" required>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 
                                 <label for="ora" class="col-2 col-form-label">Ora</label>
-                                <input class="form-control" type="time"  min="09:00" max="20:00" required id="ora">
+                                <input class="form-control" type="time"  min="09:00" max="20:00" name="ora" id="ora"required >
                                 
                             </div>
                         </div>
@@ -124,12 +125,22 @@
                     <div class="row">
 
                         <div class="col">
-                            <button type="submit" class="btn btn-primary" name="submit" value="kit" id="prenota_banco">Prenota</button>
+                            <button type="submit" class="btn btn-primary" name="banco">Prenota</button>
                         </div>
 
                     </div>
                     
                 </form>
+                <?php
+                    if(isset($_GET["success"]))
+                    {
+                        echo '<br><p style="color: green;" id="phptext">Prenotazione inserita con successo</p>';
+                    }
+                    else if(isset($_GET["error"]))
+                    {
+                        echo '<br><p style="color: #d90000;" id="phptext">Errore nella registrazione della prenotazione</p>';
+                    }
+                ?>
             </div>
         </div>
     </section>

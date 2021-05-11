@@ -27,7 +27,7 @@ TODO (spiegare varie sezioni e cosa fanno)
 ## Stato di sviluppo
 * ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+) Homepage: `quasi terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prenota elaborazione: `terminata`
-* ![#ff9900](https://via.placeholder.com/15/ff9900/000000?text=+) Prove su banco: `funzionamento da implementare`
+* ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prove su banco: `terminata`
 * ![#ff9900](https://via.placeholder.com/15/ff9900/000000?text=+) Eventi: `funzionamento da implementare`
 * ![#ffff00](https://via.placeholder.com/15/ffff00/000000?text=+) Login: `quasi terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
