@@ -69,6 +69,18 @@ INNER JOIN utenti ute
     on pre.id_utente = ute.id
 ```
 
+* Visualizza tutte le iscrizioni agli eventi
+```sql
+SELECT  ute.nome AS 'Nome',
+        ute.cognome AS 'Cognome',
+        eve.nome AS 'Evento'
+FROM iscrizioni_eventi isc
+INNER JOIN utenti ute
+    on isc.id_utente = ute.id
+INNER JOIN eventi eve
+    on isc.id_evento = eve.id
+```
+
 ## Contributi
 Essendo questo un progetto personale e soggetto a valutazione, non mi è possibile accettare contributi.
 
