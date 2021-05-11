@@ -8,7 +8,7 @@
     $dbname = "ascari-elaborazioni";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error){echo "<script>alert('errore php')</script>"}
+    if ($conn->connect_error){echo "<script>alert('errore php')</script>";}
 
     $sql = "SELECT * FROM automobili";
     $result = $conn->query($sql);
@@ -73,6 +73,7 @@
     <link rel="stylesheet" href="css/style.css">
       
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/user-dropdown.css">
       
     <style>
         
@@ -353,13 +354,21 @@
 	          <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
 	          <?php
-                    if(isset($_SESSION["nome"]))
+                    if(isset($_SESSION["id_utente"]))
                     {
-	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+	                    echo '<li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>';
+                        
+                        echo '<div class="dropdown-content">
+                                <a href="#">Prenotazioni</a>
+                                <a href="#">Modifica dati</a>
+                                <a href="logout.php">Disconnettiti</a>
+                              </div>';
+                        
+                        echo '</li>';
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link" id="accedi">Accedi</a></li>';
                     }
                ?>
 	        </ul>
@@ -379,10 +388,13 @@
     </section>
 
     <section class="ftco-section contact-section">
-        <div class="container">
+        
+        <div class="container" >
                 <div class="col-md-12">
+                    
+        <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
 
-                <form action="query.php" method="post">
+                <form action="query.php" method="post" <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
                     
                     <input type="number" name="preventivo" id="preventivo" readonly hidden>
 

@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/style.css">
       
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/user-dropdown.css">
       
     <script>
       
@@ -66,13 +67,21 @@
 	          <li class="nav-item active"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
 	          <?php
-                    if(isset($_SESSION["nome"]))
+                    if(isset($_SESSION["id_utente"]))
                     {
-	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+	                    echo '<li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>';
+                        
+                        echo '<div class="dropdown-content">
+                                <a href="#">Prenotazioni</a>
+                                <a href="#">Modifica dati</a>
+                                <a href="logout.php">Disconnettiti</a>
+                              </div>';
+                        
+                        echo '</li>';
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link" id="accedi">Accedi</a></li>';
                     }
                ?>
 	        </ul>
@@ -85,7 +94,7 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
           <div class="col-md-9 ftco-animate pb-5">
-            <h1 class="mb-3 bread">Prove su banco</h1>
+            <h1 class="mb-3 bread">Prenota prova su banco</h1>
           </div>
         </div>
       </div>
@@ -94,9 +103,8 @@
     <section class="ftco-section contact-section">
         <div class="container">
                 <div class="col-md-12">
-                    <h4>Prenota prova su banco</h4>
-                <form>
-                    
+                    <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
+                <form <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">

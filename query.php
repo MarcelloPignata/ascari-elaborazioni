@@ -7,7 +7,7 @@
     $password = "";
     $dbname = "ascari-elaborazioni";
     $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error){echo "<script>alert('errore php')</script>"}
+    if ($conn->connect_error){echo "<script>alert('errore php')</script>";}
 
 
 
@@ -24,6 +24,8 @@
                 // se lo trovo salvo il suo id nella sessione e ritorno alla pagina di partenza
                 $utente = $result->fetch_assoc();
                 $_SESSION["id_utente"] = $utente["id"];
+                $_SESSION["nome"] = $utente["nome"];
+                $_SESSION["cognome"] = $utente["cognome"];
                 header('Location: '.$_SESSION["page"].'.php');
                 exit();
             }
@@ -60,6 +62,8 @@
                 {
                     // inserisco il nuovo id nella sessione e ritorno alla pagina di partenza
                     $_SESSION["id_utente"] = $conn->insert_id;
+                    $_SESSION["nome"] = $_POST["nome"];
+                    $_SESSION["cognome"] = $_POST["cognome"];
                     header('Location: '.$_SESSION["page"].'.php');
                     exit();
                 }

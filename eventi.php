@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/style.css">
       
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/user-dropdown.css">
          
   </head>
   <body>
@@ -49,13 +50,21 @@
 	          <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item active"><a href="eventi.php" class="nav-link">Eventi</a></li>
 	          <?php
-                    if(isset($_SESSION["nome"]))
+                    if(isset($_SESSION["id_utente"]))
                     {
-	                    echo '<li class="nav-item"><a href="logout.php" class="nav-link"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</a></li>';
+	                    echo '<li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>';
+                        
+                        echo '<div class="dropdown-content">
+                                <a href="#">Prenotazioni</a>
+                                <a href="#">Modifica dati</a>
+                                <a href="logout.php">Disconnettiti</a>
+                              </div>';
+                        
+                        echo '</li>';
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link">Accedi</a></li>';
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link" id="accedi">Accedi</a></li>';
                     }
                ?>
 	        </ul>
@@ -79,43 +88,46 @@
             <div class="col-md-12">
                 <?php
                 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "ascari-elaborazioni";
-                    
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    if ($conn->connect_error) {
-                      die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    $sql = "SELECT * FROM eventi";
-                    $result = $conn->query($sql);
-                    $automobili = array();
-                    if ($result->num_rows > 0)
-                    {
-                        echo '<div class="list-group">';
-                        
-                        while($row = $result->fetch_assoc())
-                        {
-                            echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">'.$row["nome"].'</h5>
-                                            <button type="button" class="btn btn-info" id="'.$row["id"].'">Iscriviti</button>
-                                        </div>
-                                        <p class="mb-1">'.$row["descrizione"].'</p>
-                                        <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
-                                        <p class="mb-1">Contatti: '.$row["contatti"].'</p>
-                                    </div>';
-                        }
-                        
-                        echo '</div>';
-                    }
+                    if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}
                     else
                     {
-                      echo "<h4>Al momento non ci sono eventi in programma</h4>";
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "ascari-elaborazioni";
+
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        $sql = "SELECT * FROM eventi";
+                        $result = $conn->query($sql);
+                        $automobili = array();
+                        if ($result->num_rows > 0)
+                        {
+                            echo '<div class="list-group"'.'<?php if(!isset($_SESSION["id_utente"])){echo '."'".'style="display:none;"'."'".';}?>';
+
+                            while($row = $result->fetch_assoc())
+                            {
+                                echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">'.$row["nome"].'</h5>
+                                                <button type="button" class="btn btn-info" id="'.$row["id"].'">Iscriviti</button>
+                                            </div>
+                                            <p class="mb-1">'.$row["descrizione"].'</p>
+                                            <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
+                                            <p class="mb-1">Contatti: '.$row["contatti"].'</p>
+                                        </div>';
+                            }
+
+                            echo '</div>';
+                        }
+                        else
+                        {
+                          echo "<h4>Al momento non ci sono eventi in programma</h4>";
+                        }
                     }
-                
                 ?>
             </div>
         </div>
