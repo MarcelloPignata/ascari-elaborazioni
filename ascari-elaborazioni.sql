@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 10, 2021 alle 19:20
--- Versione del server: 10.4.17-MariaDB
--- Versione PHP: 8.0.1
+-- Creato il: Mag 11, 2021 alle 10:24
+-- Versione del server: 10.4.18-MariaDB
+-- Versione PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,6 +79,16 @@ CREATE TABLE `iscrizioni_eventi` (
   `id_evento` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `iscrizioni_eventi`
+--
+
+INSERT INTO `iscrizioni_eventi` (`id_evento`, `id_utente`) VALUES
+(1, 1),
+(3, 1),
+(3, 4),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -411,6 +421,14 @@ CREATE TABLE `prenotazioni_banco` (
   `ora` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dump dei dati per la tabella `prenotazioni_banco`
+--
+
+INSERT INTO `prenotazioni_banco` (`id`, `id_utente`, `data`, `ora`) VALUES
+(1, 6, '0000-00-00', '00:00:00'),
+(2, 6, '2021-05-20', '13:22:00');
+
 -- --------------------------------------------------------
 
 --
@@ -550,7 +568,7 @@ ALTER TABLE `parti`
 -- AUTO_INCREMENT per la tabella `prenotazioni_banco`
 --
 ALTER TABLE `prenotazioni_banco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `prenotazioni_elaborazioni`
