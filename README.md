@@ -30,7 +30,10 @@ TODO (spiegare varie sezioni e cosa fanno)
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prove su banco: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
-* ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Area Utente: `da implementare`
+* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente: `da completare`
+  * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Visualizzazione prenotazioni: `da implementare`
+  * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Modifica dati: `da implementare`
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione: `terminata`
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
 
 ## Query notevoli
