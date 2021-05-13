@@ -30,7 +30,7 @@ TODO (spiegare varie sezioni e cosa fanno)
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prove su banco: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
-* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente: `da completare`
+* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente:
   * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Visualizzazione prenotazioni: `da implementare`
   * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Modifica dati: `da implementare`
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione: `terminata`
@@ -92,7 +92,7 @@ Sono ben accette segnalazioni di bug e difetti tramite l'apertura di issue.
 ## Crediti
 La base estetica della piattaforma è una versione modificata di un template di Bootstrap a cura di [joefrey](https://colorlib.com/wp/author/joefreymahusay/).
 
-La base estetica delle schermate di login e registrazione sono una versione modificata di un template di Bootstrap a cura di [evarevirus](https://bootsnipp.com/evarevirus).
+La base estetica delle schermate di login e registrazione è una versione modificata di un template di Bootstrap a cura di [evarevirus](https://bootsnipp.com/evarevirus).
 
 L'icona visualizzata accanto al nome dell'utente dopo aver effettuato l'accesso è a cura di [freepik](https://www.flaticon.com/authors/freepik).
 
