@@ -1,11 +1,11 @@
 <?php
     session_start();
-    $_SESSION["page"] = "banco";
+    $_SESSION["page"] = "index";
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Prove su banco</title>
+    <title>Ascari Elaborazioni - Eventi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -32,28 +32,20 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="css/user-dropdown.css">
-      
-    <script>
-      
-        function avvio()
+    <style>
+        .nav-link
         {
-            // imposto data minima selezionabile
-            var tomorrow = new Date();
-            tomorrow.setDate(new Date().getDate()+1);
-            var dd = tomorrow.getDate();
-            var mm = tomorrow.getMonth()+1;
-            var yyyy = tomorrow.getFullYear();
-            if(dd<10){dd='0'+dd;} 
-            if(mm<10){mm='0'+mm;} 
-            var date = yyyy+'-'+mm+'-'+dd;
-            document.getElementById("data").setAttribute("min", date); 
+            color:black;
         }
-      
-    </script>    
+        .navbar-brand
+        {
+            color:black;
+        }
+    </style>
   </head>
-  <body onload="avvio();">
+  <body>
     
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +56,7 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
-	          <li class="nav-item active"><a href="banco.php" class="nav-link">Prove su banco</a></li>
+	          <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
 	          <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
 	          <?php
                     if(isset($_SESSION["id_utente"]))
@@ -89,57 +81,72 @@
 	      </div>
 	    </div>
 	  </nav>
-    
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-          <div class="col-md-9 ftco-animate pb-5">
-            <h1 class="mb-3 bread">Prenota prova su banco</h1>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="ftco-section contact-section">
         <div class="container">
-                <div class="col-md-12">
-                    <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
-                <form action="query.php" method="post"<?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
-                    <h5>Si ricorda che il prezzo di una prova su banco ammonta a 50€</h5><br>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="data">Data</label>
-                                <input type="date" class="form-control" name="data" id="data" required>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                
-                                <label for="ora" class="col-2 col-form-label">Ora</label>
-                                <input class="form-control" type="time"  min="09:00" max="20:00" name="ora" id="ora"required >
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary" name="banco">Prenota</button>
-                        </div>
-
-                    </div>
-                    
-                </form>
+            <div class="col-md-12">
                 <?php
-                    if(isset($_GET["success"]))
+                
+                    if(!isset($_SESSION["id_utente"])){echo "<h4>Come ci sei arrivato qui?</h4>";}
+                    else
                     {
-                        echo '<br><p style="color: green;" id="phptext">Prenotazione inserita con successo</p>';
-                    }
-                    else if(isset($_GET["error"]))
-                    {
-                        echo '<br><p style="color: #d90000;" id="phptext">Errore nella registrazione della prenotazione</p>';
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "ascari-elaborazioni";
+
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        if ($conn->connect_error){echo "<script>alert('errore php')</script>";}
+
+                        $sql = "SELECT * FROM utenti WHERE id = ".$_SESSION["id_utente"];
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            $utente = $result->fetch_assoc();
+                          }else {
+                          echo "<script>alert('errore php')</script>";
+                        }
+                        
+                        echo '<form action="modificaDati.php" method="post">
+                        <div class="row"><h4>&nbsp;</h4></div>
+                        <div class="row"><h3>Modifica dati</h3></div>
+                        <div class="row"><h4>&nbsp;</h4></div>
+                        
+                        <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="select_auto">Nome</label>
+                                        <input type="text" name="nome" class="form-control" id="nome" required value='.$utente["nome"].'>
+                                    </div>
+                                </div><div class="col">
+                                    <div class="form-group">
+                                        <label for="select_auto">Cognome</label>
+                                        <input type="text" name="cognome" class="form-control" id="cognome" required value='.$utente["cognome"].'>
+                                    </div>
+                                </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="select_auto">Telefono</label>
+                                        <input type="text" name="telefono" class="form-control" id="telefono" required value='.$utente["telefono"].'>
+                                    </div>
+                                </div><div class="col">
+                                    <div class="form-group">
+                                        <label for="select_auto">Email</label>
+                                        <input type="text" name="email" class="form-control" id="email" required value='.$utente["email"].'>
+                                    </div>
+                                </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row"><h4>&nbsp;</h4></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" name="modificaDati">Modifica dati</button>
+                                <button type="submit" class="btn btn-danger" name="eliminaProfilo">Elimina account</button>
+                            </div>
+                        </div>
+                        </form>';
                     }
                 ?>
             </div>
