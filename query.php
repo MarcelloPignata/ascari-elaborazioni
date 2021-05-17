@@ -27,12 +27,14 @@
                 $_SESSION["nome"] = $utente["nome"];
                 $_SESSION["cognome"] = $utente["cognome"];
                 header('Location: '.$_SESSION["page"].'.php');
+                $conn->close();
                 exit();
             }
             else
             {
                 // utente non trovato
                 header('Location: login.php?failed=1');
+                $conn->close();
                 exit();
             }
         }
@@ -51,6 +53,7 @@
             {
                 // se è già registrata ritorno alla registrazione e avviso dell'errore
                 header('Location: registrazione.php?alreadyexist=1');
+                $conn->close();
                 exit();
             }
             
@@ -65,12 +68,14 @@
                     $_SESSION["nome"] = $_POST["nome"];
                     $_SESSION["cognome"] = $_POST["cognome"];
                     header('Location: '.$_SESSION["page"].'.php');
+                    $conn->close();
                     exit();
                 }
                 else
                 {
                     // errore
                     header('Location: registrazione.php?error=1');
+                    $conn->close();
                     exit();
                 }
             }
@@ -97,7 +102,7 @@
             
             //ottengo l'ID creato
             if ($conn->query($sql) === TRUE){$id_prenotazione = $conn->insert_id;}
-            else {header('Location: prenota.php?error=1');exit();} // errore
+            else {header('Location: prenota.php?error=1');$conn->close();exit();} // errore
 
             /*
              *
@@ -113,7 +118,7 @@
             {
                 while($row = $result->fetch_assoc()){array_push($categorie,$row);}
             }
-            else {header('Location: prenota.php?error=1');exit();}
+            else {header('Location: prenota.php?error=1');$conn->close();exit();}
 
             // aggiungo ognuna delle parti selezionate nella tabella parti_prenotazioni
             for ($i = 0; $i < count($categorie); $i++)
@@ -130,6 +135,7 @@
             
             // ritorno alla pagina delle prenotazioni
             header('Location: prenota.php?success=1');
+            $conn->close();
             exit();
         }
 
@@ -155,7 +161,7 @@
 
             //ottengo l'ID creato
             if ($conn->query($sql) === TRUE){$id_prenotazione = $conn->insert_id;}
-            else {header('Location: prenota.php?error=1');exit();} // errore
+            else {header('Location: prenota.php?error=1');$conn->close();exit();} // errore
 
             // ottengo tutte le parti contenute nel kit selezionato
             $sql = "SELECT * FROM parti_kit WHERE id_kit = ".$id_kit;
@@ -168,12 +174,13 @@
                     $id_parte = $row["id_parte"];
                     $sql = "INSERT INTO parti_prenotazioni (id_prenotazione, id_parte) VALUES ('".$id_prenotazione."', '".$id_parte."')";
 
-                    if (!$conn->query($sql) === TRUE){header('Location: prenota.php?error=1');exit();}
+                    if (!$conn->query($sql) === TRUE){header('Location: prenota.php?error=1');$conn->close();exit();}
                 }
-            } else {header('Location: prenota.php?error=1');exit();}
+            } else {header('Location: prenota.php?error=1');$conn->close();exit();}
 
             // ritorno alla pagina delle prenotazioni
             header('Location: prenota.php?success=1');
+            $conn->close();
             exit();
         }
 
@@ -194,11 +201,13 @@
             if($conn->query($sql) === TRUE)
             {
                 header('Location: banco.php?success=1');
+                $conn->close();
                 exit();
             }
             else
             {
                 header('Location: banco.php?error=1');
+                $conn->close();
                 exit();
             }
         }
@@ -219,11 +228,13 @@
             if($conn->query($sql) === TRUE)
             {
                 header('Location: eventi.php?successinsert=1');
+                $conn->close();
                 exit();
             }
             else
             {
                 header('Location: eventi.php?error=1');
+                $conn->close();
                 exit();
             }
         }
@@ -245,12 +256,108 @@
             if($conn->query($sql) === TRUE)
             {
                 header('Location: eventi.php?successdelete=1');
+                $conn->close();
                 exit();
             }
             else
             {
                 header('Location: eventi.php?error=1');
+                $conn->close();
                 exit();
             }
+        }
+
+
+
+
+    // MODIFICA DATI UTENTE
+
+        else if(isset($_POST["modificaDati"]))
+        {
+            // aggiorno tutti i dati nel database con quelli inseriti dall'utente
+            $sql = "
+                    UPDATE utenti
+                    SET
+                        email='".$_POST["email"]."',
+                        nome='".$_POST["nome"]."',
+                        cognome='".$_POST["cognome"]."',
+                        telefono='".$_POST["telefono"]."'
+                    WHERE id='".$_SESSION["id_utente"]."'";
+
+            if ($conn->query($sql) === TRUE) {
+                header('Location: dati.php?success=1');
+                $conn->close();
+                exit();
+            } else {
+              header('Location: dati.php?error=1');
+                $conn->close();
+                exit();
+            }
+        }
+
+
+
+
+    // ELIMINAZIONE UTENTE
+
+        else if(isset($_POST["eliminaAccount"]))
+        {
+            
+            // elimino l'utente dalla tabella utenti
+            $sql = "DELETE FROM utenti WHERE id='".$_SESSION["id_utente"]."'";
+
+            if ($conn->query($sql) === TRUE)
+            {
+                // elimino le iscrizioni dell'utente dalla tabella iscrizioni eventi
+                $sql = "DELETE FROM iscrizioni_eventi WHERE id_utente='".$_SESSION["id_utente"]."'";
+                
+                if ($conn->query($sql) === TRUE)
+                {
+                    // elimino le prenotazioni dell'utente dalla tabella prenotazioni banco
+                    $sql = "DELETE FROM prenotazioni_banco WHERE id_utente='".$_SESSION["id_utente"]."'";
+
+                    if ($conn->query($sql) === TRUE)
+                    {
+                        // trovo tutti gli id di tutte le prenotazioni di elaborazioni effettuate dall'utente
+                        $sql = "SELECT id FROM prenotazioni_elaborazioni WHERE id_utente='".$_SESSION["id_utente"]."'";
+                        $result = $conn->query($sql);
+                        $id_prenotazioni = array();
+                        if ($result->num_rows > 0)
+                        {
+                            while($row = $result->fetch_assoc())
+                            {
+                                // elimino le parti prenotate dall'utente dalla tabella parti prenotazioni
+                                $sql = "DELETE FROM parti_prenotazioni WHERE id_prenotazione='".$row["id"]."'";
+
+                                if (!$conn->query($sql) === TRUE)
+                                {
+                                    header('Location: dati.php?error=1');
+                                    $conn->close();
+                                    exit();
+                                }
+                                
+                                // elimino le prenotazioni dell'utente dalla tabella prenotazioni elaborazioni
+                                $sql = "DELETE FROM prenotazioni_elaborazioni WHERE id='".$row["id"]."'";
+
+                                if (!$conn->query($sql) === TRUE)
+                                {
+                                    header('Location: dati.php?error=1');
+                                    $conn->close();
+                                    exit();
+                                }
+                            }
+                        }
+                        
+                        header('Location: logout.php');
+                        $conn->close();
+                        exit();
+                    }
+                }
+            }
+            
+            // se è avvenuto un errore in qualche query segnalo l'errore
+            header('Location: dati.php?error=1');
+            $conn->close();
+            exit();
         }
 ?>

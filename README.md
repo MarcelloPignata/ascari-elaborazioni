@@ -32,7 +32,8 @@ TODO (spiegare varie sezioni e cosa fanno)
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
 * ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente:
   * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Visualizzazione prenotazioni: `da implementare`
-  * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Modifica dati: `da implementare`
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica dati: `terminata`
+  * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Modifica password: `da implementare`
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione: `terminata`
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
 

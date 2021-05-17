@@ -42,6 +42,8 @@
     } else {
       echo "<script>alert('errore php')</script>";
     }
+
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -393,7 +395,7 @@
         <div class="container" >
                 <div class="col-md-12">
                     
-        <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
+                <?php if(!isset($_SESSION["id_utente"])){echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";}?>
 
                 <form action="query.php" method="post" <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
                     

@@ -32,20 +32,10 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="css/user-dropdown.css">
-    <style>
-        .nav-link
-        {
-            color:black;
-        }
-        .navbar-brand
-        {
-            color:black;
-        }
-    </style>
   </head>
-  <body>
+  <body style = "padding-right: 0 !important;">
     
-	  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar">
+	  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar"  style = "padding-right: 0 !important;">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,9 +75,12 @@
     <section class="ftco-section contact-section">
         <div class="container">
             <div class="col-md-12">
-                <?php
                 
-                    if(!isset($_SESSION["id_utente"])){echo "<h4>Come ci sei arrivato qui?</h4>";}
+                <?php
+                    if(!isset($_SESSION["id_utente"]))
+                    {
+                        echo "<h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4>";
+                    }
                     else
                     {
                         $servername = "localhost";
@@ -105,8 +98,9 @@
                           }else {
                           echo "<script>alert('errore php')</script>";
                         }
-                        
-                        echo '<form action="modificaDati.php" method="post">
+                    }
+                ?>
+                <form action="query.php" method="post" <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
                         <div class="row"><h4>&nbsp;</h4></div>
                         <div class="row"><h3>Modifica dati</h3></div>
                         <div class="row"><h4>&nbsp;</h4></div>
@@ -115,12 +109,12 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="select_auto">Nome</label>
-                                        <input type="text" name="nome" class="form-control" id="nome" required value='.$utente["nome"].'>
+                                        <input type="text" name="nome" class="form-control" id="nome" required value='<?php echo $utente["nome"]?>'>
                                     </div>
                                 </div><div class="col">
                                     <div class="form-group">
                                         <label for="select_auto">Cognome</label>
-                                        <input type="text" name="cognome" class="form-control" id="cognome" required value='.$utente["cognome"].'>
+                                        <input type="text" name="cognome" class="form-control" id="cognome" required value='<?php echo $utente["cognome"]?>'>
                                     </div>
                                 </div>
                             <div class="col"></div>
@@ -129,12 +123,12 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="select_auto">Telefono</label>
-                                        <input type="text" name="telefono" class="form-control" id="telefono" required value='.$utente["telefono"].'>
+                                        <input type="text" name="telefono" class="form-control" id="telefono" required value='<?php echo $utente["telefono"]?>'>
                                     </div>
                                 </div><div class="col">
                                     <div class="form-group">
                                         <label for="select_auto">Email</label>
-                                        <input type="text" name="email" class="form-control" id="email" required value='.$utente["email"].'>
+                                        <input type="text" name="email" class="form-control" id="email" required value='<?php echo $utente["email"]?>'>
                                     </div>
                                 </div>
                             <div class="col"></div>
@@ -143,12 +137,43 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-primary" name="modificaDati">Modifica dati</button>
-                                <button type="submit" class="btn btn-danger" name="eliminaProfilo">Elimina account</button>
+                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confermaElimina">Elimina account</button>
+                                
+                                
+                                <div class="modal z" id="confermaElimina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:red;">Conferma eliminazione account</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body" style="color:black;">
+                                        Sei sicuro di voler eliminare definitivamente il tuo account? Questa operazione cancellerà anche tutte le tue prenotazioni e iscrizioni.
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="submit" class="btn btn-light" name="eliminaAccount">Elimina account</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annulla</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
-                        </form>';
-                    }
-                ?>
+                        </div>
+                        </form>
+                    <?php
+                        if(isset($_GET["success"]))
+                        {
+                            echo '<br><p style="color: green;" id="phptext">Dati modificati con successo</p>';
+                        }
+                        else if(isset($_GET["error"]))
+                        {
+                            echo '<br><p style="color: #d90000;" id="phptext">Errore PHP</p>';
+                        }
+                    ?>
             </div>
         </div>
     </section>

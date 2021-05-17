@@ -181,6 +181,8 @@
                           echo "<h4>Al momento non ci sono eventi in programma</h4>";
                         }
                     }
+                
+                    $conn->close();
                 ?>
             </div>
         </div>
