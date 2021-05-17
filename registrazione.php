@@ -274,12 +274,7 @@
                 
                 try
                 {
-                    document.getElementById("phperror1").innerHTML = "";
-                }catch(error){}
-                
-                try
-                {
-                    document.getElementById("phperror2").innerHTML = "";
+                    document.getElementById("phperror").innerHTML = "";
                 }catch(error){}
             }
           
@@ -307,11 +302,11 @@
                 <?php
                     if(isset($_GET["alreadyexist"]))
                     {
-                        echo '<p style="color: #d90000;" id="phperror1">Email già registrata</p>';
+                        echo '<p style="color: #d90000;" id="phperror">Email già registrata</p>';
                     }
                 if(isset($_GET["failed"]))
                     {
-                        echo '<p style="color: #d90000;" id="phperror2">Errore nella registrazione</p>';
+                        echo '<p style="color: #d90000;" id="phperror">Errore nella registrazione</p>';
                     }
                 ?>
             </form>

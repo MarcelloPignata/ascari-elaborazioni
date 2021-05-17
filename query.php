@@ -360,4 +360,53 @@
             $conn->close();
             exit();
         }
+
+
+
+
+    // MODIFICA PASSWORD
+
+        else if(isset($_POST["modificaPassword"]))
+        {
+            // trovo tutti gli id di tutte le prenotazioni di elaborazioni effettuate dall'utente
+            $sql = "SELECT password FROM utenti WHERE id='".$_SESSION["id_utente"]."'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0)
+            {
+                $row = $result->fetch_assoc();
+                
+                if($row["password"] == $_POST["vecchiapassword"])
+                {
+                    // aggiorno la password dell'utente nella tabella utenti
+                    $sql = "
+                            UPDATE utenti
+                            SET
+                                password ='".$_POST["password1"]."'
+                            WHERE id='".$_SESSION["id_utente"]."'";
+
+                    if ($conn->query($sql) === TRUE) {
+                        header('Location: password.php?success=1');
+                        $conn->close();
+                        exit();
+                    } else {
+                        header('Location: password.php?error=1');
+                        $conn->close();
+                        exit();
+                    }
+                }
+                else
+                {
+                    header('Location: password.php?wrongpassword=1');
+                    $conn->close();
+                    exit();
+                }
+            }
+            else
+            {
+                header('Location: password.php?error=1');
+                $conn->close();
+                exit();
+            }
+            
+        }
 ?>

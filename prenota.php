@@ -363,7 +363,7 @@
                         echo '<div class="dropdown-content">
                                 <a href="#">Prenotazioni</a>
                                 <a href="dati.php">Modifica dati</a>
-                                <a href="#">Modifica password</a>
+                                <a href="password.php">Modifica password</a>
                                 <a href="logout.php">Disconnettiti</a>
                               </div>';
                         

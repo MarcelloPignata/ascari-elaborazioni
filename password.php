@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Modifica dati</title>
+    <title>Ascari Elaborazioni - Modifica password</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -32,6 +32,50 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="css/user-dropdown.css">
+    
+    <script>
+        function enablePassword2()
+            {
+                if(document.getElementById("password1").value != "")
+                {
+                    document.getElementById("password2").disabled = false;
+                }
+                else
+                {
+                    document.getElementById("password2").disabled = true;
+                }
+            }
+        
+        function controlli()
+        {
+            var p = document.getElementById("errore");
+            var vecchiapassword = document.getElementById("vecchiapassword").value;
+            var password1 = document.getElementById("password1").value;
+            var password2 = document.getElementById("password2").value;
+                
+                if(password1 == "" || vecchiapassword == "")
+                {
+                    p.innerHTML = "Inserisci una password";
+                }
+                else if (password1 != password2)
+                {
+                    p.innerHTML = "Le password non coincidono";
+                }
+                else if(password1.length > 20)
+                {
+                    p.innerHTML = "Inserisci una password più corta";
+                }
+                else
+                {
+                    document.getElementById("submit").click();
+                }
+            
+                try
+                {
+                    document.getElementById("phptext").innerHTML = "";
+                }catch(error){}
+        }
+    </script>
   </head>
   <body style = "padding-right: 0 !important;">
     
@@ -85,8 +129,7 @@
                         <div class='row'><h4>&nbsp;</h4></div>
                         <div class='row'><h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4></div>    
                         <div class='row'><h4>&nbsp;</h4></div>
-                        <div class='row'><h4>&nbsp;</h4></div>
-                        ";
+                        <div class='row'><h4>&nbsp;</h4></div>";
                     }
                     else
                     {
@@ -109,33 +152,30 @@
                 ?>
                 <form action="query.php" method="post" <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
                         <div class="row"><h4>&nbsp;</h4></div>
-                        <div class="row"><h3>Modifica dati</h3></div>
+                        <div class="row"><h3>Modifica password</h3></div>
                         <div class="row"><h4>&nbsp;</h4></div>
                         
                         <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="select_auto">Nome</label>
-                                        <input type="text" name="nome" class="form-control" id="nome" required value='<?php echo $utente["nome"]?>'>
+                                        <label for="select_auto">Vecchia password</label>
+                                        <input type="password" name="vecchiapassword" id="vecchiapassword" class="form-control" required>
                                     </div>
-                                </div><div class="col">
-                                    <div class="form-group">
-                                        <label for="select_auto">Cognome</label>
-                                        <input type="text" name="cognome" class="form-control" id="cognome" required value='<?php echo $utente["cognome"]?>'>
-                                    </div>
+                                </div>
+                                <div class="col">
                                 </div>
                             <div class="col"></div>
                         </div>
                         <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="select_auto">Telefono</label>
-                                        <input type="text" name="telefono" class="form-control" id="telefono" required value='<?php echo $utente["telefono"]?>'>
+                                        <label for="select_auto">Nuova password</label>
+                                        <input type="password" name="password1" id="password1" oninput="enablePassword2();" class="form-control" required>
                                     </div>
                                 </div><div class="col">
                                     <div class="form-group">
-                                        <label for="select_auto">Email</label>
-                                        <input type="text" name="email" class="form-control" id="email" required value='<?php echo $utente["email"]?>'>
+                                        <label for="select_auto">Ripeti nuova password</label>
+                                        <input type="password" name="password2" id="password2" class="form-control" required disabled>
                                     </div>
                                 </div>
                             <div class="col"></div>
@@ -143,38 +183,20 @@
                         <div class="row"><h4>&nbsp;</h4></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-primary" name="modificaDati">Modifica dati</button>
-                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confermaElimina">Elimina account</button>
-                                
-                                
-                                <div class="modal z" id="confermaElimina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:red;">Conferma eliminazione account</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body" style="color:black;">
-                                        Sei sicuro di voler eliminare definitivamente il tuo account? Questa operazione cancellerà anche tutte le tue prenotazioni e iscrizioni.
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="submit" class="btn btn-light" name="eliminaAccount">Elimina account</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annulla</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
+                                <button type="button" class="btn btn-primary" onclick="controlli()">Modifica password</button>
+                                <button type="submit" name="modificaPassword" id="submit" hidden></button>
                         </div>
                         </div>
                         </form>
+                        <br><p style="color: #d90000;" id="errore"></p>
                     <?php
                         if(isset($_GET["success"]))
                         {
-                            echo '<br><p style="color: green;" id="phptext">Dati modificati con successo</p>';
+                            echo '<br><p style="color: green;" id="phptext">Password modificata con successo</p>';
+                        }
+                        else if(isset($_GET["wrongpassword"]))
+                        {
+                            echo '<br><p style="color: #d90000;" id="phptext">Vecchia password errata</p>';
                         }
                         else if(isset($_GET["error"]))
                         {
