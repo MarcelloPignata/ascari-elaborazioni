@@ -311,6 +311,14 @@
 
         else if(isset($_POST["eliminaAccount"]))
         {
+            /*
+            *
+            *
+            *        TODO 
+            *        query unica
+            *
+            *
+            */
             
             // elimino l'utente dalla tabella utenti
             $sql = "DELETE FROM utenti WHERE id='".$_SESSION["id_utente"]."'";
@@ -416,6 +424,41 @@
                 $conn->close();
                 exit();
             }
+            
+        }
+
+
+
+
+    // ELIMINA PRENOTAZIONE ELABORAZIONE
+
+        else if(isset($_POST["eliminazione_elaborazione"]))
+        {
+            echo "elimina ".$_POST["id_elaborazione"];
+            
+            // elimino le parti prenotate dalla tabella parti prenotazioni
+            $sql = "DELETE FROM parti_prenotazioni WHERE id_prenotazione='".$_POST["id_elaborazione"]."'";
+
+            if (!$conn->query($sql) === TRUE)
+            {
+                header('Location: prenotazioni.php?error=1');
+                $conn->close();
+                exit();
+            }
+
+            // elimino la prenotazione dalla tabella prenotazioni elaborazioni
+            $sql = "DELETE FROM prenotazioni_elaborazioni WHERE id='".$_POST["id_elaborazione"]."'";
+
+            if (!$conn->query($sql) === TRUE)
+            {
+                header('Location: prenotazioni.php?error=1');
+                $conn->close();
+                exit();
+            }
+            
+            header('Location: prenotazioni.php?show=1');
+            $conn->close();
+            exit();
             
         }
 ?>

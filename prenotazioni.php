@@ -1,11 +1,22 @@
 <?php
     session_start();
     $_SESSION["page"] = "prenotazioni";
+
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "ascari-elaborazioni";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Modifica password</title>
+    <title>Ascari Elaborazioni - Visualizza prenotazioni</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -81,6 +92,12 @@
         {
             document.getElementById("id_evento").value = id_evento;
             document.getElementById("submit_disiscrizione").click();
+        }
+        
+        function elimina_elaborazione (id_elaborazione)
+        {
+            document.getElementById("id_elaborazione").value = id_elaborazione;
+            document.getElementById("submit_elimina_elaborazione").click();
         }
         
     </script>
@@ -159,7 +176,61 @@
                                 
                                 <div id="elaborazioni" style="display:none;">
                                     
-                                    <p>elaborazioni</p>
+                                    <?php
+
+                                        $sql = "SELECT pre.id, aut.marca, aut.modello, aut.serie, pre.targa, pre.data, pre.bancaggio, pre.preventivo FROM prenotazioni_elaborazioni pre INNER JOIN automobili aut ON pre.id_automobile = aut.id WHERE id_utente = ".$_SESSION["id_utente"]." AND pre.stato = 'da ricevere'";
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0)
+                                        {
+                                            
+                                            echo '<div class="list-group">';
+                                            while($row = $result->fetch_assoc())
+                                            {
+                                              if ($row["bancaggio"])
+                                              {
+                                                  $bancaggio = "Sì";
+                                              }
+                                              else
+                                              {
+                                                  $bancaggio = "No";
+                                              }
+                                              
+                                            echo '<div class="list-group-item list-group-item-action flex-column align-items-start">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Prenotazione #'.$row["id"].'</h5>
+                                                        <button type="button" class="btn btn-danger" onclick="elimina_elaborazione('.$row["id"].')">Elimina</button></div>
+                                                        <p class="mb-1">'.$row["marca"].' '.$row["modello"].' '.$row["serie"].' ('.$row["targa"].')</p>
+                                                        <p class="mb-1">Da consegnare il '.$row["data"].'</p>
+                                                        <p class="mb-1">Bancaggio: '.$bancaggio.'</p>
+                                                        <p class="mb-1">Preventivo: '.$row["preventivo"].'€</p>
+                                                        <p class="mb-1">Parti richieste: ';
+                                                
+                                                $sql = "SELECT par.nome FROM parti_prenotazioni par_pre INNER JOIN parti par on par_pre.id_parte = par.id WHERE par_pre.id_prenotazione =".$row["id"];
+                                                $result2 = $conn->query($sql);
+                                                if ($result2->num_rows > 0)
+                                                {   
+                                                    echo $result2->fetch_assoc()["nome"];
+                                                    while($row2 = $result2->fetch_assoc())
+                                                    {
+                                                        echo ", ".$row2["nome"];
+                                                    }
+                                                    
+                                                }
+                                                echo '</p>
+                                                </div>';
+                                            }
+
+                                            echo '</div>';
+                                        
+                                            echo '<input type="number" name="id_elaborazione" id="id_elaborazione" readonly hidden>';
+                                            echo '<button type="submit" name="eliminazione_elaborazione" id="submit_elimina_elaborazione" hidden>';
+                                        }
+                                        else
+                                        {
+                                            echo "<p>Non hai nessuna prenotazione, <a href='prenota.php'>registrane una!</a></p>";
+                                        }
+                                    
+                                    ?>
                                     
                                 </div>
                                 
@@ -173,15 +244,6 @@
                                     
                                     
                                     <?php
-                                        $servername = "localhost";
-                                        $username = "root";
-                                        $password = "";
-                                        $dbname = "ascari-elaborazioni";
-
-                                        $conn = new mysqli($servername, $username, $password, $dbname);
-                                        if ($conn->connect_error) {
-                                          die("Connection failed: " . $conn->connect_error);
-                                        }
 
                                         $sql = "SELECT eve.id, eve.nome, eve.luogo, eve.data, eve.ora, eve.descrizione, eve.contatti FROM iscrizioni_eventi isc INNER JOIN eventi eve on isc.id_evento = eve.id WHERE isc.id_utente = ".$_SESSION["id_utente"];
                                         $result = $conn->query($sql);
@@ -195,18 +257,20 @@
                                                echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
                                                         <div class="d-flex w-100 justify-content-between">
                                                             <h5 class="mb-1">'.$row["nome"].'</h5>
-                                                            <button type="button" class="btn btn-success" onclick="disiscrivi_evento('.$row["id"].')">Disiscriviti</button></div>
+                                                            <button type="button" class="btn btn-danger" onclick="disiscrivi_evento('.$row["id"].')">Disiscriviti</button></div>
                                                             <p class="mb-1">'.$row["descrizione"].'</p>
                                                             <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
                                                             <p class="mb-1">Contatti: '.$row["contatti"].'</p>
                                                         </div>';
                                             }
-
-                                            echo '</div>';
+                                        
+                                            echo '</div><input type="number" name="id_evento" id="id_evento" readonly hidden>';
+                                            echo '<button type="submit" name="disiscrizione_evento" id="submit_disiscrizione" hidden>';
                                         }
-                                    
-                                        echo '<input type="number" name="id_evento" id="id_evento" readonly hidden>';
-                                        echo '<button type="submit" name="disiscrizione_evento" id="submit_disiscrizione" hidden>';
+                                        else
+                                        {
+                                            echo "<p>Non sei iscritto a nessun evento, <a href='eventi.php'>trovane uno!</a></p>";
+                                        }
                                     ?>
                                     
                                 </div>
