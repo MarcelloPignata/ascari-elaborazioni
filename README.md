@@ -1,5 +1,5 @@
 # Ascari Elaborazioni
-ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazioni". Questo progetto rappresenta la porzione di codice significativa sviluppata da Pignata Marcello, della classe 5^B Informatica dell'IIS Jean Monnet, Mariano Comense (CO), per l'elaborato dell'Esame di Stato conclusivo del corso di studio di istruzione secondaria superiore dell'anno scolastico 2020-2021.
+ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazioni". Questo progetto rappresenta la porzione di codice significativa sviluppata da Pignata Marcello, della classe 5^B Informatica dell'IIS Jean Monnet, Mariano Comense (CO), per l'elaborato dell'Esame di Stato conclusivo del corso di studio di istruzione secondaria superiore dell'anno scolastico 2020-2021. Per una più completa illustrazione dello scopo e della struttura della piattaforma si rimanda alla lettura del documento "Ascari Elaborazioni.pdf"
 
 ## Indice
 
@@ -14,7 +14,29 @@ ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazion
 
 ## Utilizzo
 	 
-TODO (spiegare varie sezioni e cosa fanno)
+La piattaforma ha lo scopo di permettere l'interazione con una base di dati da me sviluppata, e per fare ciò viene vengono proposte una serie di pagine e funzionalità suddivise nelle seguenti sezioni:
+* **Homepage**: una semplice pagina introduttiva del sito, contenente una breve presentazione dell’officina e dei servizi offerti e i collegamenti a tutte le altre sezioni.
+* **Prenotazione elaborazione**: è qui possibile inserire nel database una prenotazione di elaborazione, selezionando il modello di veicolo e le parti tra quelli disponibili nel database. Per la selezione delle parti, sono previste due alternative:
+  * *Elaborazione personalizzata*: consiste nella selezione delle singole parti presenti sul database e associate al modello di veicolo selezionato.
+  * *Selezione kit*: consiste nella selezione di uno tra i kit presenti nel database e associato al modello di veicolo selezionato. Un kit consiste in un insieme di parti selezionate per uno stesso veicolo.
+* **Prove su banco**: è qui possibile inserire nel database una prenotazione di prova su banco
+* **Eventi**: è qui possibile la visualizzazione di tutti gli eventi presenti nel database e l'iscrizione / disiscrizione degli utenti ad essi
+* **Accesso e registrazione**
+  * *Accesso*: è da qui possibile interrogare il database con una email e password, qualora sia presente un utente registrato con tali dati verrà correttamente effettuato l'accesso con tale utente alla piattaforma, al quale verranno associate tutte le prenotazioni ed iscrizioni che effettuerà mentre è loggato
+  * *Registrazione*: è da qui possibile inserire nel database un nuovo utente, effettuando i dovuti controlli sui dati inseriti che il caso richiede
+* **Area utente**: consiste in un pannello di controllo del proprio profilo per un utente che ha effettuato l'accesso, e prevede quattro funzioni:
+  * *Visualizza prenotazioni*: rimanda ad una pagina dove è possibile visualizzare tutte le prenotazioni ed iscrizioni del database associate al profilo dell'utente attualmente loggato, viene prevista la possibile per l'utente di eliminare ciascuna di esse e tutti i dati ad esse associate anche in tabelle esterne
+  * *Modifica dati*: rimanda ad una pagina dove è possibile visualizzare ed eventualmente modificare tutti i dati associati al profilo dell'utente attualmente loggato, viene inoltre prevista la possibilità di eliminare il profilo e con esso tutti i dati ad esso associati anche in tabelle esterne
+  * *Modifica password*: rimanda ad una pagina dove è possibile modificare la password associata al profilo dell'utente attualmente loggato, con le dovute misure di sicurezza che il caso richiede
+  * *Disconnettiti*: effettua la disconnessione dal profilo dell'utente attualmente loggato per la sessione attuale
+* **Amministrazione**: consiste in un secondo portale, separato dalla pagina accessibile dagli utenti e accessibile solo tramite credenziali di amministratore, dove sarà possibile visualizzare, modificare ed eliminare tutti i dati presenti sul database. Esso è suddivisa nelle seguenti sezioni, che corrispondono alle singole entità presenti sul database:
+  * *Gestione prenotazioni elaborazioni*
+  * *Gestione prenotazioni banco*
+  * *Gestione utenti*
+  * *Gestione eventi*
+  * *Gestione automobili*
+  * *Gestione parti*
+  * *Gestione kit*
 
 ## Installazione
 * Per il completo e corretto funzionamento del portale tramite installazione in locale è necessaria l'installazione del software [XAMPP](https://www.apachefriends.org/).
