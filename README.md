@@ -27,21 +27,21 @@ TODO (spiegare varie sezioni e cosa fanno)
 ## Stato di sviluppo
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Homepage: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prenota elaborazione: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Personalizzata: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Kit: `terminata`
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Personalizzata
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Kit
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Prove su banco: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi: `terminata`
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Accesso: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Registrazione: `terminata`
-* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente:
-  * ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Visualizzazione prenotazioni: `da completare`
-    * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Elaborazioni: `terminata`
-    * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Banco: `da implementare`
-    * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica dati: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica password: `terminata`
-  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione: `terminata`
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Accesso
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Registrazione
+* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente: `da completare`
+  * ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Visualizzazione prenotazioni:
+    * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Elaborazioni
+    * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Banco
+    * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica dati:
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica password:
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione:
 * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
 
 ## Query notevoli
