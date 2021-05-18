@@ -434,8 +434,6 @@
 
         else if(isset($_POST["eliminazione_elaborazione"]))
         {
-            echo "elimina ".$_POST["id_elaborazione"];
-            
             // elimino le parti prenotate dalla tabella parti prenotazioni
             $sql = "DELETE FROM parti_prenotazioni WHERE id_prenotazione='".$_POST["id_elaborazione"]."'";
 
@@ -459,6 +457,31 @@
             header('Location: prenotazioni.php?show=1');
             $conn->close();
             exit();
+            
+        }
+
+
+
+
+    // ELIMINA PRENOTAZIONE BANCO
+
+        else if(isset($_POST["eliminazione_banco"]))
+        {
+            // elimino la prenotazione dalla tabella prenotazioni banco
+            $sql = "DELETE FROM prenotazioni_banco WHERE id ='".$_POST["id_banco"]."'";
+
+            if ($conn->query($sql) === TRUE)
+            {
+                header('Location: prenotazioni.php?show=2');
+                $conn->close();
+                exit();
+            }
+            else
+            {
+                header('Location: prenotazioni.php?show=1');
+                $conn->close();
+                exit();
+            }
             
         }
 ?>

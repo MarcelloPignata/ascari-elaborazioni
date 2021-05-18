@@ -82,7 +82,7 @@
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link" id="accedi">Accedi</a></li>';
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-success nav-link" id="accedi">Accedi</a></li>';
                     }
                ?>
 	        </ul>

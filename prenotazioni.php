@@ -100,6 +100,12 @@
             document.getElementById("submit_elimina_elaborazione").click();
         }
         
+        function elimina_banco (id_banco)
+        {
+            document.getElementById("id_banco").value = id_banco;
+            document.getElementById("submit_elimina_banco").click();
+        }
+        
     </script>
   </head>
   <body style = "padding-right: 0 !important;" <?php if(isset($_GET["show"])){echo "onload='show(".$_GET["show"].")'";}?> >
@@ -133,7 +139,7 @@
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a href="login.php" class="btn btn-info nav-link" id="accedi">Accedi</a></li>';
+                        echo '<li class="nav-item"><a href="login.php" class="btn btn-success nav-link" id="accedi">Accedi</a></li>';
                     }
                ?>
 	        </ul>
@@ -236,8 +242,32 @@
                                 
                                 <div id="banco" style="display:none;">
                                     
-                                    <p>banco</p>
+                                    <?php
+
+                                        $sql = "SELECT * FROM prenotazioni_banco WHERE id_utente = ".$_SESSION["id_utente"];
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0)
+                                        {
+                                            
+                                            echo '<div class="list-group">';
+                                            while($row = $result->fetch_assoc())
+                                            { 
+                                                echo '<div class="list-group-item list-group-item-action flex-column align-items-start">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1">Prenotazione #'.$row["id"].'</h5>
+                                                            <button type="button" class="btn btn-danger" onclick="elimina_banco('.$row["id"].')">Elimina</button></div>
+                                                            <p class="mb-1">'.$row["data"].' '.$row["ora"].'</p>
+                                                        </div>';
+                                            }
+                                            echo '</div><input type="number" name="id_banco" id="id_banco" readonly hidden>';
+                                            echo '<button type="submit" name="eliminazione_banco" id="submit_elimina_banco" hidden>';
+                                        }
+                                        else
+                                        {
+                                            echo "<p>Non hai nessuna prenotazione, <a href='banco.php'>registrane una!</a></p>";
+                                        }
                                 
+                                        ?>
                                 </div>
                                 
                                 <div id="eventi" style="display:none;">
