@@ -3,7 +3,7 @@
     $_SESSION["page"] = "eventi";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>Ascari Elaborazioni - Eventi</title>
     <meta charset="utf-8">

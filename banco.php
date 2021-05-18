@@ -3,7 +3,7 @@
     $_SESSION["page"] = "banco";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>Ascari Elaborazioni - Prove su banco</title>
     <meta charset="utf-8">

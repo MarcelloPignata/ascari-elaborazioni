@@ -34,10 +34,10 @@ TODO (spiegare varie sezioni e cosa fanno)
 * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Login: `terminata`
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Accesso
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Registrazione
-* ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Area Utente: `da completare`
-  * ![#ff9933](https://via.placeholder.com/15/ff9933/000000?text=+) Visualizzazione prenotazioni:
+* ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Area Utente: `terminata`
+  * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Visualizzazione prenotazioni:
     * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Elaborazioni
-    * ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Banco
+    * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Banco
     * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Eventi
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica dati:
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica password:

@@ -14,7 +14,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>Ascari Elaborazioni - Visualizza prenotazioni</title>
     <meta charset="utf-8">

@@ -3,7 +3,7 @@
     $_SESSION["page"] = "index";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>Ascari Elaborazioni - Modifica dati</title>
     <meta charset="utf-8">
