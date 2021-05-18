@@ -1,11 +1,11 @@
 <?php
     session_start();
-    $_SESSION["page"] = "index";
+    $_SESSION["page"] = "prenotazioni";
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ascari Elaborazioni - Modifica dati</title>
+    <title>Ascari Elaborazioni - Modifica password</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -32,8 +32,60 @@
       
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="css/user-dropdown.css">
+    
+    <script>
+        
+        function show(on)
+        {
+            var off1, off2;
+            switch(on)
+            {
+                case 1:
+                    on = "elaborazioni";
+                    off1 = "banco";
+                    off2 = "eventi"
+                    break;
+                    
+                case 2:
+                    on = "banco";
+                    off1 = "elaborazioni";
+                    off2 = "eventi"
+                    break;
+                    
+                case 3:
+                    on = "eventi";
+                    off1 = "elaborazioni";
+                    off2 = "banco"
+                    break;
+            }
+            
+            // nascondo le altre sezioni
+            document.getElementById(off1).style.display = "none";
+            document.getElementById(off2).style.display = "none";
+            
+            // visualizzo l'elaborazione
+            document.getElementById(on).style.display = "block";
+            
+            // cambio colore ai pulsanti
+            document.getElementById(on+"_btn").classList.remove("btn-light");
+            document.getElementById(on+"_btn").classList.add("btn-dark");
+            document.getElementById(off1+"_btn").classList.remove("btn-dark");
+            document.getElementById(off1+"_btn").classList.add("btn-light");
+            document.getElementById(off2+"_btn").classList.remove("btn-dark");
+            document.getElementById(off2+"_btn").classList.add("btn-light");
+        }
+        
+        
+        
+        function disiscrivi_evento(id_evento)
+        {
+            document.getElementById("id_evento").value = id_evento;
+            document.getElementById("submit_disiscrizione").click();
+        }
+        
+    </script>
   </head>
-  <body style = "padding-right: 0 !important;">
+  <body style = "padding-right: 0 !important;" <?php if(isset($_GET["show"])){echo "onload='show(".$_GET["show"].")'";}?> >
     
 	  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar"  style = "padding-right: 0 !important;">
 	    <div class="container">
@@ -54,8 +106,8 @@
 	                    echo '<li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>';
                         
                         echo '<div class="dropdown-content">
-                                <a href="prenotazioni.php">Prenotazioni</a>
-                                <a href="dati.php" style="background-color:black; color: white;">Modifica dati</a>
+                                <a href="prenotazioni.php" style="background-color:black; color: white;">Prenotazioni</a>
+                                <a href="dati.php">Modifica dati</a>
                                 <a href="password.php">Modifica password</a>
                                 <a href="logout.php">Disconnettiti</a>
                               </div>';
@@ -85,102 +137,94 @@
                         <div class='row'><h4>&nbsp;</h4></div>
                         <div class='row'><h4>Devi aver effettuato l'accesso per accedere a questa sezione</h4></div>    
                         <div class='row'><h4>&nbsp;</h4></div>
-                        <div class='row'><h4>&nbsp;</h4></div>
-                        ";
-                    }
-                    else
-                    {
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "ascari-elaborazioni";
-
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                        if ($conn->connect_error){echo "<script>alert('errore php')</script>";}
-
-                        $sql = "SELECT * FROM utenti WHERE id = ".$_SESSION["id_utente"];
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            $utente = $result->fetch_assoc();
-                          }else {
-                          echo "<script>alert('errore php')</script>";
-                        }
+                        <div class='row'><h4>&nbsp;</h4></div>";
                     }
                 ?>
                 <form action="query.php" method="post" <?php if(!isset($_SESSION["id_utente"])){echo 'style="display:none;"';}?>>
-                        <div class="row"><h4>&nbsp;</h4></div>
-                        <div class="row"><h3>Modifica dati</h3></div>
-                        <div class="row"><h4>&nbsp;</h4></div>
-                        
+                    
+                        <div class='row'><h4>&nbsp;</h4></div>
                         <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="select_auto">Nome</label>
-                                        <input type="text" name="nome" class="form-control" id="nome" required value='<?php echo $utente["nome"]?>'>
-                                    </div>
-                                </div><div class="col">
-                                    <div class="form-group">
-                                        <label for="select_auto">Cognome</label>
-                                        <input type="text" name="cognome" class="form-control" id="cognome" required value='<?php echo $utente["cognome"]?>'>
-                                    </div>
-                                </div>
-                            <div class="col"></div>
-                        </div>
-                        <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="select_auto">Telefono</label>
-                                        <input type="text" name="telefono" class="form-control" id="telefono" required value='<?php echo $utente["telefono"]?>'>
-                                    </div>
-                                </div><div class="col">
-                                    <div class="form-group">
-                                        <label for="select_auto">Email</label>
-                                        <input type="text" name="email" class="form-control" id="email" required value='<?php echo $utente["email"]?>'>
-                                    </div>
-                                </div>
-                            <div class="col"></div>
-                        </div>
-                        <div class="row"><h4>&nbsp;</h4></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary" name="modificaDati">Modifica dati</button>
-                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confermaElimina">Elimina account</button>
-                                
-                                
-                                <div class="modal z" id="confermaElimina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:red;">Conferma eliminazione account</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body" style="color:black;">
-                                        Sei sicuro di voler eliminare definitivamente il tuo account? Questa operazione cancellerà anche tutte le tue prenotazioni e iscrizioni.
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="submit" class="btn btn-light" name="eliminaAccount">Elimina account</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Annulla</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-light" onclick="show(1)" id="elaborazioni_btn" value="Prenotazioni elaborazioni">
+                                <input type="button" class="btn btn-light" onclick="show(2)" id="banco_btn" value="Prenotazioni banco">
+                                <input type="button" class="btn btn-light" onclick="show(3)" id="eventi_btn" value="Iscrizioni eventi">
                             </div>
                         </div>
                         </div>
+                        <div class='row'><h4>&nbsp;</h4></div>
+                    
+                        <div class="row">
+                            <div class="col">
+                                
+                                <div id="elaborazioni" style="display:none;">
+                                    
+                                    <p>elaborazioni</p>
+                                    
+                                </div>
+                                
+                                <div id="banco" style="display:none;">
+                                    
+                                    <p>banco</p>
+                                
+                                </div>
+                                
+                                <div id="eventi" style="display:none;">
+                                    
+                                    
+                                    <?php
+                                        $servername = "localhost";
+                                        $username = "root";
+                                        $password = "";
+                                        $dbname = "ascari-elaborazioni";
+
+                                        $conn = new mysqli($servername, $username, $password, $dbname);
+                                        if ($conn->connect_error) {
+                                          die("Connection failed: " . $conn->connect_error);
+                                        }
+
+                                        $sql = "SELECT eve.id, eve.nome, eve.luogo, eve.data, eve.ora, eve.descrizione, eve.contatti FROM iscrizioni_eventi isc INNER JOIN eventi eve on isc.id_evento = eve.id WHERE isc.id_utente = ".$_SESSION["id_utente"];
+                                        $result = $conn->query($sql);
+                                        $iscrizioni = array();
+                                        if ($result->num_rows > 0)
+                                        {
+                                            echo '<div class="list-group">';
+                                            
+                                            while($row = $result->fetch_assoc())
+                                            {
+                                               echo   '<div class="list-group-item list-group-item-action flex-column align-items-start">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1">'.$row["nome"].'</h5>
+                                                            <button type="button" class="btn btn-success" onclick="disiscrivi_evento('.$row["id"].')">Disiscriviti</button></div>
+                                                            <p class="mb-1">'.$row["descrizione"].'</p>
+                                                            <p class="mb-1">'.$row["data"].', '.$row["ora"].'</p>
+                                                            <p class="mb-1">Contatti: '.$row["contatti"].'</p>
+                                                        </div>';
+                                            }
+
+                                            echo '</div>';
+                                        }
+                                    
+                                        echo '<input type="number" name="id_evento" id="id_evento" readonly hidden>';
+                                        echo '<button type="submit" name="disiscrizione_evento" id="submit_disiscrizione" hidden>';
+                                    ?>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class='row'>
+                            <div class='col'>
+                                <?php
+                                    if(isset($_GET["error"]))   
+                                    {
+                                        echo '<br><p style="color: #d90000;" id="phptext">Errore PHP</p>';
+                                    }
+                                ?>
+                        </div>
+                        </div>
                         </form>
-                    <?php
-                        if(isset($_GET["success"]))
-                        {
-                            echo '<br><p style="color: green;" id="phptext">Dati modificati con successo</p>';
-                        }
-                        else if(isset($_GET["error"]))
-                        {
-                            echo '<br><p style="color: #d90000;" id="phptext">Errore PHP</p>';
-                        }
-                    ?>
+                        <br><p style="color: #d90000;" id="errore"></p>
             </div>
         </div>
     </section>

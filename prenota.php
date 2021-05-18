@@ -361,7 +361,7 @@
 	                    echo '<li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>';
                         
                         echo '<div class="dropdown-content">
-                                <a href="#">Prenotazioni</a>
+                                <a href="prenotazioni.php">Prenotazioni</a>
                                 <a href="dati.php">Modifica dati</a>
                                 <a href="password.php">Modifica password</a>
                                 <a href="logout.php">Disconnettiti</a>

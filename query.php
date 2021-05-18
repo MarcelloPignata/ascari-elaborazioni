@@ -255,9 +255,18 @@
             $sql = "DELETE FROM iscrizioni_eventi WHERE id_evento='".$id_evento."' AND id_utente='".$id_utente."'";
             if($conn->query($sql) === TRUE)
             {
-                header('Location: eventi.php?successdelete=1');
-                $conn->close();
-                exit();
+                if($_SESSION["page"] == "prenotazioni")
+                {
+                    header('Location: prenotazioni.php?show=3');
+                    $conn->close();
+                    exit();
+                }
+                else
+                {
+                    header('Location: eventi.php?successdelete=1');
+                    $conn->close();
+                    exit();
+                }
             }
             else
             {
