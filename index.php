@@ -55,30 +55,41 @@
                         <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
                         
                         <?php
+                        
                             if(isset($_SESSION["id_utente"]))
                             {
                                 echo '
-                                    <li class="nav-item dropdown"><button class="nav-link dropbtn" id="username"><img src="images/account.png" width="25px">&nbsp;'.$_SESSION["nome"].' '.$_SESSION["cognome"].'</button>
-                                    
+                                    <li class="nav-item dropdown">
+                                        <button class="nav-link dropbtn" id="username">
+
+                                            <img src="images/account.png" width="25px">&nbsp;
+                                            '.$_SESSION["nome"].' '.$_SESSION["cognome"].'
+
+                                        </button>
+                                        
                                         <div class="dropdown-content">
                                         
                                             <a href="prenotazioni.php">Prenotazioni</a>
                                             <a href="dati.php">Modifica dati</a>
                                             <a href="password.php">Modifica password</a>
                                             <a href="logout.php">Disconnettiti</a>
-                                            
+                                        
                                         </div>
                                         
                                     </li>
-                                ';
+                                    ';
                             }
                             else
                             {
                                 echo '
                                     <li class="nav-item">
+                                    
                                         <a href="login.php" class="btn btn-success nav-link" id="accedi">Accedi</a>
-                                    </li>';
+                                        
+                                    </li>
+                                    ';
                             }
+                        
                         ?>
                         
                     </ul>
