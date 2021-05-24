@@ -1,25 +1,30 @@
-<?php session_start(); ?>
+<?php session_start();?>
+
 <!DOCTYPE html>
+
 <html lang="it">
-  <head>
-    <title>Ascari Elaborazioni</title>
-    <meta charset="utf-8">
-      
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="stylesheet" href="css/style.css">
-      
-    <link rel="icon" type="image/png" href="images/logo.png">
-      
-      <meta charset='UTF-8'>
+    <head>
+        
+        <title>Ascari Elaborazioni</title>
+        
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <link rel="icon" type="image/png" href="images/logo.png">
+
         <style class="cp-pen-styles">
-            @import url(https://fonts.googleapis.com/css?family=Open+Sans);
             
+            @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
             form
             {
                 text-align: center;
             }
-            
+
             .btn
             {
                 display: inline-block;
@@ -53,15 +58,15 @@
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
                 cursor: pointer;
                 *margin-left: .3em;
-            }
+                }
 
-            .btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled]
-            {
+                .btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled]
+                {
                 background-color: #e6e6e6;
-            }
+                }
 
-            .btn-large
-            {
+                .btn-large
+                {
                 padding: 9px 14px;
                 font-size: 15px;
                 line-height: normal;
@@ -82,7 +87,7 @@
                 -o-transition: background-position 0.1s linear;
                 transition: background-position 0.1s linear;
             }
-            
+
             .btn-block
             {
                 width: 100%; display:block;
@@ -154,15 +159,18 @@
             {
                 box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
             }
-            
-            input::placeholder { 
-              color: #c2c1be;
-              opacity: 1;
+
+            input::placeholder 
+            { 
+                color: #c2c1be;
+                opacity: 1;
             }
+            
         </style>
-      
-      <script>
-          
+
+        <script>
+
+            // abilita o disabilita l'input per la seconda password
             function enablePassword2()
             {
                 if(document.getElementById("password1").value != "")
@@ -174,28 +182,29 @@
                     document.getElementById("password2").disabled = true;
                 }
             }
-        
+
+            // effettua tutti i controlli sui dati inseriti
             function Controlli()
             {
                 var p = document.getElementById("errore");
-              
+
                 var nome = document.getElementById("nome");
                 var cognome = document.getElementById("cognome");
                 var telefono = document.getElementById("telefono");
                 var email = document.getElementById("email");
                 var password1 = document.getElementById("password1");
                 var password2 = document.getElementById("password2");
-              
+
                 p.innerHTML = "";
-                
+
                 nome.style.borderColor = "rgba(0,0,0,0.3)";
                 cognome.style.borderColor = "rgba(0,0,0,0.3)";
                 telefono.style.borderColor = "rgba(0,0,0,0.3)";
                 email.style.borderColor = "rgba(0,0,0,0.3)";
                 password1.style.borderColor = "rgba(0,0,0,0.3)";
                 password2.style.borderColor = "rgba(0,0,0,0.3)";
-                
-                
+
+
                 // NOME
                 if(nome.value == "")
                 {
@@ -209,7 +218,7 @@
                 {
                     p.innerHTML += "Inserisci un nome più corto<br>";
                 }
-              
+
                 // COGNOME
                 if(cognome.value == "")
                 {
@@ -223,7 +232,7 @@
                 {
                     p.innerHTML += "Inserisci un cognome più corto<br>";
                 }
-                
+
                 // TELEFONO
                 if(telefono.value == "")
                 {
@@ -237,7 +246,7 @@
                 {
                     p.innerHTML += "Inserisci un numero più corto<br>";
                 }
-                
+
                 // EMAIL
                 if(email.value == "")
                 {
@@ -251,7 +260,7 @@
                 {
                     p.innerHTML += "Inserisci una mail più corta<br>";
                 }
-                
+
                 //PASSWORD
                 if(password1.value == "")
                 {
@@ -265,53 +274,71 @@
                 {
                     p.innerHTML += "Inserisci una password più corta<br>";
                 }
-                
+
                 if (p.innerHTML == "")
                 {
                     document.getElementById("submit").click();
                 }
+
                 
-                
+                // se presente, cancello i messaggi di errore delle query
                 try
                 {
                     document.getElementById("phperror").innerHTML = "";
-                }catch(error){}
+                }
+                catch(error){}
             }
-          
-      </script>
-  </head>
-  <body>
+
+        </script>
+        
+    </head>
     
+    <body>
+
     <div class="hero-wrap ftco-degree-bg" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-          <div class="login">
-            <form action="query.php" method="post">
-                <p><img src="images/logo_AE.png" style="height: 10vh"></p>
-                <input type="text" name="nome" id="nome" placeholder="Nome" required/>
-                <input type="text" name="cognome" id="cognome" placeholder="Cognome" required/>
-                <input type="text" name="telefono" id="telefono" placeholder="Telefono" required/>
-                <input type="text" name="email" id="email" placeholder="Email" required="required" />
-                <input type="password" name="password1" id="password1" placeholder="Password" oninput="enablePassword2();"  required/>
-                <input type="password" name="password2" id="password2" placeholder="Ripeti password" required disabled/>
-                <button type="button" class="btn btn-block btn-large" onclick="Controlli();">Registrati</button>
-                <button type="submit" name="registrazione" id="submit" hidden></button>
-                <br>
-                <p style="color:white;">Già registrato? <a href="login.php" style="color: #09825b ; font-weight: bold;">Accedi!</a></p>
-                <p style="color: #d90000;" id="errore"></p>
-                <?php
-                    if(isset($_GET["alreadyexist"]))
-                    {
-                        echo '<p style="color: #d90000;" id="phperror">Email già registrata</p>';
-                    }
-                if(isset($_GET["failed"]))
-                    {
-                        echo '<p style="color: #d90000;" id="phperror">Errore nella registrazione</p>';
-                    }
-                ?>
-            </form>
-      </div>
+        
+        <div class="overlay"></div>
+        
+        <div class="container">
+            
+            <div class="login">
+                
+                <form action="query.php" method="post">
+                    
+                    <p><img src="images/logo_AE.png" style="height: 10vh"></p>
+                    <input type="text" name="nome" id="nome" placeholder="Nome" required/>
+                    <input type="text" name="cognome" id="cognome" placeholder="Cognome" required/>
+                    <input type="text" name="telefono" id="telefono" placeholder="Telefono" required/>
+                    <input type="text" name="email" id="email" placeholder="Email" required="required" />
+                    <input type="password" name="password1" id="password1" placeholder="Password" oninput="enablePassword2();"  required/>
+                    <input type="password" name="password2" id="password2" placeholder="Ripeti password" required disabled/>
+                    <button type="button" class="btn btn-block btn-large" onclick="Controlli();">Registrati</button>
+                    <button type="submit" name="registrazione" id="submit" hidden></button>
+                    <br>
+                    <p style="color:white;">Già registrato? <a href="login.php" style="color: #09825b ; font-weight: bold;">Accedi!</a></p>
+                    <p style="color: #d90000;" id="errore"></p>
+                    
+                    <?php
+                    
+                        if(isset($_GET["alreadyexist"]))
+                        {
+                            echo '<p style="color: #d90000;" id="phperror">Email già registrata</p>';
+                        }
+                        if(isset($_GET["failed"]))
+                        {
+                            echo '<p style="color: #d90000;" id="phperror">Errore nella registrazione</p>';
+                        }
+                    
+                    ?>
+                    
+                </form>
+                
+            </div>
+            
+        </div>
+        
     </div>
-    </div>
-  </body>
+        
+    </body>
+    
 </html>

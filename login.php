@@ -1,25 +1,30 @@
-<?php session_start(); ?>
+<?php session_start();?>
+
 <!DOCTYPE html>
+
 <html lang="it">
-  <head>
-    <title>Ascari Elaborazioni</title>
-    <meta charset="utf-8">
-      
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="stylesheet" href="css/style.css">
+    <head>
       
-    <link rel="icon" type="image/png" href="images/logo.png">
-      
-      <meta charset='UTF-8'>
+        <title>Ascari Elaborazioni</title>
+
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <link rel="icon" type="image/png" href="images/logo.png">
+
         <style class="cp-pen-styles">
+
             @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-            
+
             form
             {
                 text-align: center;
             }
-            
+
             .btn
             {
                 display: inline-block;
@@ -82,7 +87,7 @@
                 -o-transition: background-position 0.1s linear;
                 transition: background-position 0.1s linear;
             }
-            
+
             .btn-block
             {
                 width: 100%; display:block;
@@ -154,37 +159,54 @@
             {
                 box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
             }
-            
-            input::placeholder { 
-              color: #c2c1be;
-              opacity: 1;
+
+            input::placeholder
+            { 
+                color: #c2c1be;
+                opacity: 1;
             }
+
         </style>
-  </head>
-  <body>
+        
+    </head>
     
-    <div class="hero-wrap ftco-degree-bg" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-          <div class="login">
-            <h1></h1>
-            <form action="query.php" method="post">
-                <p><img src="images/logo_AE.png" style="height: 10vh"></p>
-                <input type="text" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Password"/>
-                <button type="submit" name="login" class="btn btn-block btn-large">Login</button>
-                <br>
-                <p style="color:white;">Altrimenti, <a href="registrazione.php" style="color: #09825b ; font-weight: bold;">registrati!</a></p>
+    <body>
+
+        <div class="hero-wrap ftco-degree-bg" data-stellar-background-ratio="0.5">
+            
+            <div class="overlay"></div>
+            
+            <div class="container">
                 
-                <?php
-                    if(isset($_GET["failed"]))
-                    {
-                        echo '<p style="color: #d90000;">Nome utente o password errata</p>';
-                    }
-                ?>
-            </form>
-      </div>
-    </div>
-    </div>
-  </body>
+                <div class="login">
+                    
+                    <h1></h1>
+                    
+                    <form action="query.php" method="post">
+                        
+                        <p><img src="images/logo_AE.png" style="height: 10vh"></p>
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password"/>
+                        <button type="submit" name="login" class="btn btn-block btn-large">Login</button>
+                        <br>
+                        <p style="color:white;">Altrimenti, <a href="registrazione.php" style="color: #09825b ; font-weight: bold;">registrati!</a></p>
+
+                        <?php
+                        
+                            if(isset($_GET["failed"]))
+                            {
+                                echo '<p style="color: #d90000;">Nome utente o password errata</p>';
+                            }
+                        
+                        ?>
+                        
+                    </form>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </body>
 </html>
