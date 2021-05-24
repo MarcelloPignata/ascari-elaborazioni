@@ -91,63 +91,63 @@
             
             <div class="container">
                 
-            <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="index.php">Ascari<span>Elaborazioni</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="oi oi-menu"></span> Menu
+
+                </button>
                 
-                <span class="oi oi-menu"></span> Menu
-                
-            </button>
-                
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                
-                <ul class="navbar-nav ml-auto">
-                    
-                <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
-                <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
-                <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
-                    
-                <?php
-                        
-                    if(isset($_SESSION["id_utente"]))
-                    {
-                        echo '
-                            <li class="nav-item dropdown">
-                                <button class="nav-link dropbtn" id="username">
+                <div class="collapse navbar-collapse" id="ftco-nav">
 
-                                    <img src="images/account.png" width="25px">&nbsp;
-                                    '.$_SESSION["nome"].' '.$_SESSION["cognome"].'
+                    <ul class="navbar-nav ml-auto">
 
-                                </button>
+                    <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="prenota.php" class="nav-link">Prenota elaborazione</a></li>
+                    <li class="nav-item"><a href="banco.php" class="nav-link">Prove su banco</a></li>
+                    <li class="nav-item"><a href="eventi.php" class="nav-link">Eventi</a></li>
 
-                                <div class="dropdown-content">
+                    <?php
 
-                                    <a href="prenotazioni.php">Prenotazioni</a>
-                                    <a href="dati.php">Modifica dati</a>
-                                    <a href="password.php">Modifica password</a>
-                                    <a href="logout.php">Disconnettiti</a>
+                        if(isset($_SESSION["id_utente"]))
+                        {
+                            echo '
+                                <li class="nav-item dropdown">
+                                    <button class="nav-link dropbtn" id="username">
 
-                                </div>
+                                        <img src="images/account.png" width="25px">&nbsp;
+                                        '.$_SESSION["nome"].' '.$_SESSION["cognome"].'
 
-                            </li>
-                            ';
-                    }
-                    else
-                    {
-                        echo '
-                            <li class="nav-item">
+                                    </button>
 
-                                <a href="login.php" class="btn btn-success nav-link" id="accedi">Accedi</a>
+                                    <div class="dropdown-content">
 
-                            </li>
-                            ';
-                    }
-                        
-                ?>
-                    
-                </ul>
-                
-            </div>
+                                        <a href="prenotazioni.php">Prenotazioni</a>
+                                        <a href="dati.php">Modifica dati</a>
+                                        <a href="password.php" style="background-color:black; color: white;">Modifica password</a>
+                                        <a href="logout.php">Disconnettiti</a>
+
+                                    </div>
+
+                                </li>
+                                ';
+                        }
+                        else
+                        {
+                            echo '
+                                <li class="nav-item">
+
+                                    <a href="login.php" class="btn btn-success nav-link" id="accedi">Accedi</a>
+
+                                </li>
+                                ';
+                        }
+
+                    ?>
+
+                    </ul>
+
+                </div>
                 
             </div>
             

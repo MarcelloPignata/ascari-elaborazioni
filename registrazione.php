@@ -197,12 +197,12 @@
 
                 p.innerHTML = "";
 
-                nome.style.borderColor = "rgba(0,0,0,0.3)";
-                cognome.style.borderColor = "rgba(0,0,0,0.3)";
-                telefono.style.borderColor = "rgba(0,0,0,0.3)";
-                email.style.borderColor = "rgba(0,0,0,0.3)";
-                password1.style.borderColor = "rgba(0,0,0,0.3)";
-                password2.style.borderColor = "rgba(0,0,0,0.3)";
+                nome.style.borderColor = "rgba(255,0,0,1)";
+                cognome.style.borderColor = "rgba(255,0,0,1)";
+                telefono.style.borderColor = "rgba(255,0,0,1)";
+                email.style.borderColor = "rgba(255,0,0,1)";
+                password1.style.borderColor = "rgba(255,0,0,1)";
+                password2.style.borderColor = "rgba(255,0,0,1)";
 
 
                 // NOME
@@ -218,6 +218,10 @@
                 {
                     p.innerHTML += "Inserisci un nome più corto<br>";
                 }
+                else
+                {
+                    nome.style.borderColor = "rgba(0,0,0,0.3)";
+                }
 
                 // COGNOME
                 if(cognome.value == "")
@@ -231,6 +235,10 @@
                 else if(cognome.value.length > 20)
                 {
                     p.innerHTML += "Inserisci un cognome più corto<br>";
+                }
+                else
+                {
+                    cognome.style.borderColor = "rgba(0,0,0,0.3)";
                 }
 
                 // TELEFONO
@@ -246,6 +254,10 @@
                 {
                     p.innerHTML += "Inserisci un numero più corto<br>";
                 }
+                else
+                {
+                    telefono.style.borderColor = "rgba(0,0,0,0.3)";
+                }
 
                 // EMAIL
                 if(email.value == "")
@@ -260,6 +272,10 @@
                 {
                     p.innerHTML += "Inserisci una mail più corta<br>";
                 }
+                else
+                {
+                    email.style.borderColor = "rgba(0,0,0,0.3)";
+                }
 
                 //PASSWORD
                 if(password1.value == "")
@@ -273,6 +289,11 @@
                 else if(password1.value.length > 20)
                 {
                     p.innerHTML += "Inserisci una password più corta<br>";
+                }
+                else
+                {
+                    password1.style.borderColor = "rgba(0,0,0,0.3)";
+                    password2.style.borderColor = "rgba(0,0,0,0.3)";
                 }
 
                 if (p.innerHTML == "")
