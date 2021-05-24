@@ -162,7 +162,7 @@
                         if(kit[i]["id_automobile"] == id_auto)
                         {
                             var option = document.createElement('option');
-                            option.text = kit[i]["nome"];
+                            option.text = kit[i]["nome"] + " - " + kit[i]["prezzo"] + "€";
                             option.value = kit[i]["id"]; 
                             select_kit.appendChild(option); 
                         }
