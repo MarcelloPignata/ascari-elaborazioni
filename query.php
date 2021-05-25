@@ -103,12 +103,6 @@
             //ottengo l'ID creato
             if ($conn->query($sql) === TRUE){$id_prenotazione = $conn->insert_id;}
             else {header('Location: prenota.php?error=1');$conn->close();exit();} // errore
-
-            /*
-             *
-             *      TODO: ottimizzare i cicli (il secondo for non è neccessario, posso trasferirlo dentro il primo while)
-             *
-             */
             
             // ottengo tutte le categorie di parti disponibili per la macchina selezionata
             $sql = "SELECT * FROM parti WHERE id_automobile = ".$id_automobile." GROUP BY categoria";
@@ -311,15 +305,6 @@
 
         else if(isset($_POST["eliminaAccount"]))
         {
-            /*
-            *
-            *
-            *        TODO 
-            *        query unica
-            *
-            *
-            */
-            
             // elimino l'utente dalla tabella utenti
             $sql = "DELETE FROM utenti WHERE id='".$_SESSION["id_utente"]."'";
 

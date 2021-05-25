@@ -203,7 +203,7 @@
                         if (parti[i]["id_automobile"] == id_auto)
                         {
                             var option = document.createElement('option');
-                            option.text = parti[i]["nome"];
+                            option.text = parti[i]["nome"] + " - " + parti[i]["prezzo"] + "€";
                             option.value = parti[i]["id"]; 
                             document.getElementById(parti[i]["categoria"]).appendChild(option);
                         }
