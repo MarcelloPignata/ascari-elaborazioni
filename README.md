@@ -64,7 +64,7 @@ La piattaforma ha lo scopo di permettere l'interazione con una base di dati da m
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica dati:
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Modifica password:
   * ![#00ff00](https://via.placeholder.com/15/00ff00/000000?text=+) Disconnessione:
-* ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `da implementare`
+* ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Amministrazione: `non implementata`
 
 ## Query notevoli
 
