@@ -10,7 +10,6 @@ ascari-elaborazioni è il portale web dell'officina fittizia "Ascari Elaborazion
 * [Contributi](#contributi)
 * [Crediti](#crediti)
 * [Licenza](#licenza)
-* [Ringraziamenti](#ringraziamenti)
 
 ## Utilizzo
 	 
@@ -138,6 +137,3 @@ Con la presente si concede, a chiunque ottenga una copia di questo software e de
 L'avviso di copyright indicato sopra e questo avviso di autorizzazione devono essere inclusi in ogni copia o parte sostanziale del Software.
 
 IL SOFTWARE VIENE FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPLICITE O IMPLICITE, IVI INCLUSE, IN VIA ESEMPLIFICATIVA, LE GARANZIE DI COMMERCIABILITÀ, IDONEITÀ A UN FINE PARTICOLARE E NON VIOLAZIONE DEI DIRITTI ALTRUI. IN NESSUN CASO GLI AUTORI O I TITOLARI DEL COPYRIGHT SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRO TIPO DI RESPONSABILITÀ, A SEGUITO DI AZIONE CONTRATTUALE, ILLECITO O ALTRO, DERIVANTE DA O IN CONNESSIONE AL SOFTWARE, AL SUO UTILIZZO O AD ALTRE OPERAZIONI CON LO STESSO.
-
-## Ringraziamenti
-TODO
