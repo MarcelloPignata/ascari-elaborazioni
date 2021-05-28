@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 11, 2021 alle 10:24
--- Versione del server: 10.4.18-MariaDB
--- Versione PHP: 8.0.3
+-- Creato il: Mag 28, 2021 alle 10:52
+-- Versione del server: 10.4.19-MariaDB
+-- Versione PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ascari-elaborazioni`
 --
+CREATE DATABASE IF NOT EXISTS `ascari-elaborazioni` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `ascari-elaborazioni`;
 
 -- --------------------------------------------------------
 
@@ -65,9 +67,9 @@ CREATE TABLE `eventi` (
 --
 
 INSERT INTO `eventi` (`id`, `nome`, `luogo`, `data`, `ora`, `descrizione`, `contatti`) VALUES
-(1, 'Evento #1', 'Luogo n°1', 'Venerdì 26 Maggio', '14.30', 'venite numerosi!', '1234567890\r\n1234567890\r\n1234567890'),
-(2, 'Evento #2', 'Luogo n°2', 'Sabato 28 Febbraio', '23.00', 'Car meet notturno, non mancare!', 'carmeet.it\r\nfacebook.com/carmeet.it'),
-(3, 'Evento #3', 'Seveso, MB', '26 Febbraio', '00.00', 'Midnight club!\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'marcellopignata02@gmail.com');
+(4, 'Milano Night Run', 'Via Vincenzo Monti 2, Pero (MI)', '27/07/2021', '23:00', 'Le migliori auto al miglior orario della giornata, non puoi mancare!', 'www.milanonightrun.it'),
+(5, '100 Anni di Mazda', 'Rho Fieramilano, Gate 2', '13-15 Ottobre 2021', '10:00 - 20:00', 'Festeggia con noi i 100 Anni dalla nascita del vostro marchio automobilistico preferito!', 'mazda.it\r\nFacebook: Mazda Italia'),
+(6, 'TunersMeet', 'Parcheggio Carrefour Paderno Dugnano', '23/10/2021', '14:30', 'Elaborazioni, tuning, trasformazioni, preparazioni e molto altro, in una giornata dedicata agli esperti del settore', 'Whatsapp: 0192837465');
 
 -- --------------------------------------------------------
 
@@ -79,16 +81,6 @@ CREATE TABLE `iscrizioni_eventi` (
   `id_evento` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `iscrizioni_eventi`
---
-
-INSERT INTO `iscrizioni_eventi` (`id_evento`, `id_utente`) VALUES
-(1, 1),
-(3, 1),
-(3, 4),
-(2, 4);
 
 -- --------------------------------------------------------
 
@@ -386,28 +378,6 @@ CREATE TABLE `parti_prenotazioni` (
   `id_parte` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dump dei dati per la tabella `parti_prenotazioni`
---
-
-INSERT INTO `parti_prenotazioni` (`id_prenotazione`, `id_parte`) VALUES
-(2, 72),
-(2, 64),
-(2, 77),
-(3, 22),
-(3, 5),
-(3, 10),
-(3, 17),
-(3, 26),
-(3, 20),
-(3, 14),
-(3, 25),
-(3, 24),
-(4, 4),
-(5, 1),
-(5, 15),
-(5, 24);
-
 -- --------------------------------------------------------
 
 --
@@ -420,14 +390,6 @@ CREATE TABLE `prenotazioni_banco` (
   `data` date NOT NULL,
   `ora` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `prenotazioni_banco`
---
-
-INSERT INTO `prenotazioni_banco` (`id`, `id_utente`, `data`, `ora`) VALUES
-(1, 6, '0000-00-00', '00:00:00'),
-(2, 6, '2021-05-20', '13:22:00');
 
 -- --------------------------------------------------------
 
@@ -445,17 +407,6 @@ CREATE TABLE `prenotazioni_elaborazioni` (
   `preventivo` float NOT NULL,
   `stato` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `prenotazioni_elaborazioni`
---
-
-INSERT INTO `prenotazioni_elaborazioni` (`id`, `id_utente`, `id_automobile`, `targa`, `data`, `bancaggio`, `preventivo`, `stato`) VALUES
-(1, 4, 2, 'ABC123', '2021-05-11', 0, 600, 'da ricevere'),
-(2, 4, 3, 'ABC1234', '2021-05-12', 1, 650, 'da ricevere'),
-(3, 6, 1, 'AA828RX', '2021-05-15', 0, 2600, 'da ricevere'),
-(4, 6, 1, 'TARGA', '2021-05-19', 0, 400, 'da ricevere'),
-(5, 6, 1, 'targa2', '2021-05-16', 1, 450, 'da ricevere');
 
 -- --------------------------------------------------------
 
@@ -477,12 +428,7 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id`, `email`, `password`, `nome`, `cognome`, `telefono`) VALUES
-(1, 'marcellopignata02@gmail.com', 'password', 'Marcello', 'Pignata', '1234567890'),
-(2, 'nify707@gmail.com', 'asd', 'Marcelloo', 'Pignataa', '12345678901'),
-(3, 'elia.colombo08@gmail.com', 'asd', 'Marcellooo', 'Pignataaa', '12345678902'),
-(4, 'laura.bellato@tiscali.it', 'asd2', 'Laura', 'Bellato', '12345678903'),
-(5, 'luppinovincenzo@gmail.com', 'asdf', 'Vincenzo', 'Luppino', '12345678904'),
-(6, 'marco.pignata@ge.com', 'asd', 'Marco', 'Pignata', '0362524513');
+(8, 'pincopallino@gmail.com', 'asd', 'pinco', 'pallino', '1234567890');
 
 --
 -- Indici per le tabelle scaricate
@@ -511,12 +457,6 @@ ALTER TABLE `kit`
 --
 ALTER TABLE `parti`
   ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `parti_kit`
---
-ALTER TABLE `parti_kit`
-  ADD PRIMARY KEY (`id_kit`,`id_parte`);
 
 --
 -- Indici per le tabelle `prenotazioni_banco`
@@ -550,7 +490,7 @@ ALTER TABLE `automobili`
 -- AUTO_INCREMENT per la tabella `eventi`
 --
 ALTER TABLE `eventi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `kit`
@@ -568,19 +508,19 @@ ALTER TABLE `parti`
 -- AUTO_INCREMENT per la tabella `prenotazioni_banco`
 --
 ALTER TABLE `prenotazioni_banco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `prenotazioni_elaborazioni`
 --
 ALTER TABLE `prenotazioni_elaborazioni`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

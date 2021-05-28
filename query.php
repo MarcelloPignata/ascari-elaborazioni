@@ -288,6 +288,8 @@
                     WHERE id='".$_SESSION["id_utente"]."'";
 
             if ($conn->query($sql) === TRUE) {
+                $_SESSION["nome"] = $_POST["nome"];
+                $_SESSION["cognome"] = $_POST["cognome"];
                 header('Location: dati.php?success=1');
                 $conn->close();
                 exit();

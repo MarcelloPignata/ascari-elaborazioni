@@ -42,7 +42,7 @@ La piattaforma ha lo scopo di permettere l'interazione con una base di dati da m
 * Una volta installato e aperto il programma sarà necessario avviare i moduli  "Apache" e "MySQL".
 * Si procede ora a clonare la repository all'interno della cartella htdocs di XAMPP, che solitamente si trova all'indirizzo `C:\xampp\htdocs`.
 * Utilizzando un qualsiasi browser si dovrà poi accedere alla piattaforma di phpMyAdmin all'indirizzo `localhost/phpmyadmin`.
-* Tramite phpMyAdmin si dovrà creare un nuovo database chiamato "ascari-elaborazioni", e effettuare l'importazione del database utilizzando il file "ascari-elaborazioni.sql", presente tra i file del progetto.
+* Tramite phpMyAdmin si dovrà effettuare l'importazione del database utilizzando il file "database.sql", presente tra i file del progetto.
 * Il portale sarà ora funzionante e accessibile tramite browser all'indirizzo `localhost/ascari-elaborazioni`
 
 ## Stato di sviluppo
