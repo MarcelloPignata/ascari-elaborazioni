@@ -113,7 +113,7 @@
                         <div class="text w-100 text-center mb-md-5 pb-md-5">
                             
                             <h1 class="mb-4">Dietro ogni grande pilota c'è sempre una grande officina</h1>
-                            <p style="font-size: 18px;">Passione e tecnica dal 1992</p>
+                            <p style="font-size: 18px;">E quelli potremmo essere noi</p>
                             
                         </div>
                         
